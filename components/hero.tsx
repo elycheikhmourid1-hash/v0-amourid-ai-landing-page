@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
-import { ArrowRight, MapPin } from "lucide-react"
+import { ArrowRight, MapPin, Sparkles } from "lucide-react"
+import { LeadFormDialog } from "@/components/lead-form-dialog"
 
 export function Hero() {
   return (
@@ -35,12 +36,16 @@ export function Hero() {
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <Button asChild size="lg" className="rounded-full px-8 text-base">
-            <a href="#contact">
-              Request Free Consultation
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
-          </Button>
+          <LeadFormDialog>
+            <Button
+              size="lg"
+              className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 px-8 text-base font-semibold shadow-lg shadow-accent/20 gap-2"
+            >
+              <Sparkles className="h-4 w-4" />
+              Try Free Automation Now
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </LeadFormDialog>
           <Button
             asChild
             variant="outline"

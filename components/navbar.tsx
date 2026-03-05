@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import { LeadFormDialog } from "@/components/lead-form-dialog"
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -39,9 +40,11 @@ export function Navbar() {
         </nav>
 
         <div className="hidden md:block">
-          <Button asChild size="default" className="rounded-full px-6">
-            <a href="#contact">Free Consultation</a>
-          </Button>
+          <LeadFormDialog>
+            <Button size="default" className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 px-6">
+              Free Consultation
+            </Button>
+          </LeadFormDialog>
         </div>
 
         <button
@@ -66,11 +69,11 @@ export function Navbar() {
                 {link.label}
               </a>
             ))}
-            <Button asChild size="default" className="rounded-full mt-2">
-              <a href="#contact" onClick={() => setMobileOpen(false)}>
+            <LeadFormDialog>
+              <Button size="default" className="rounded-full mt-2 bg-accent text-accent-foreground hover:bg-accent/90">
                 Free Consultation
-              </a>
-            </Button>
+              </Button>
+            </LeadFormDialog>
           </nav>
         </div>
       )}

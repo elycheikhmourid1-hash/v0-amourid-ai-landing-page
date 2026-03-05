@@ -3,22 +3,27 @@ import { NextResponse } from "next/server"
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { firstName, lastName, email, company, message } = body
+    const { firstName, lastName, email, company, phone, message, source } = body
 
     if (!firstName || !email || !message) {
       return NextResponse.json(
-        { error: "First name, email, and message are required." },
+        { error: "Name, email, and message are required." },
         { status: 400 }
       )
     }
 
-    const subject = encodeURIComponent(
-      `New consultation request from ${firstName} ${lastName || ""}`
-    )
+    const isLeadForm = source === "lead-form"
+    const subjectLine = isLeadForm
+      ? `New automation lead from ${firstName}`
+      : `New consultation request from ${firstName} ${lastName || ""}`
+
+    const subject = encodeURIComponent(subjectLine)
     const bodyText = [
-      `Name: ${firstName} ${lastName || ""}`,
+      `Name: ${firstName} ${lastName || ""}`.trim(),
       `Email: ${email}`,
+      phone ? `Phone: ${phone}` : null,
       company ? `Company: ${company}` : null,
+      isLeadForm ? `Source: Free Automation Lead Form` : null,
       `\nMessage:\n${message}`,
     ]
       .filter(Boolean)
