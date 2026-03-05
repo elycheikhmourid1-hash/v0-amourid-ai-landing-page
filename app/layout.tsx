@@ -14,9 +14,36 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'AImouridAI - AI Automation for Smarter Business',
+  title: 'AImouridAI - AI Automation for Smarter Business | Richmond, VA',
   description:
-    'AImouridAI is a Richmond, Virginia-based AI automation startup specializing in Google Forms automation, data analytics, and smart automated responses for businesses.',
+    'AImouridAI is a Richmond, Virginia-based AI automation startup specializing in Google Forms automation, data analytics, and smart automated responses for businesses. Request a free consultation today.',
+  keywords: [
+    'AI automation Richmond',
+    'Google Forms automation',
+    'data analytics',
+    'smart automated responses',
+    'business automation Virginia',
+    'AImouridAI',
+    'AI consulting Richmond VA',
+  ],
+  openGraph: {
+    title: 'AImouridAI - AI Automation for Smarter Business',
+    description:
+      'Automate workflows, unlock data insights, and deliver intelligent responses with AImouridAI. Based in Richmond, Virginia.',
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'AImouridAI',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AImouridAI - AI Automation for Smarter Business',
+    description:
+      'Automate workflows, unlock data insights, and deliver intelligent responses with AImouridAI. Based in Richmond, Virginia.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [
       {

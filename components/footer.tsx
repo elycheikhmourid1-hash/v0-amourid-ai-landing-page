@@ -25,6 +25,12 @@ export function Footer() {
             How We Work
           </a>
           <a
+            href="#testimonials"
+            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Testimonials
+          </a>
+          <a
             href="#contact"
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >

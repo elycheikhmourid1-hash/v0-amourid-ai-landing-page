@@ -5,14 +5,46 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { ArrowRight, Mail, MapPin, Phone, Linkedin, CheckCircle2 } from "lucide-react"
+import { ArrowRight, Mail, MapPin, Phone, Linkedin, CheckCircle2, Loader2 } from "lucide-react"
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setSubmitted(true)
+    setLoading(true)
+    setError("")
+
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      firstName: formData.get("first-name") as string,
+      lastName: formData.get("last-name") as string,
+      email: formData.get("email") as string,
+      company: formData.get("company") as string,
+      message: formData.get("message") as string,
+    }
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+
+      const result = await res.json()
+
+      if (result.success && result.mailtoUrl) {
+        window.open(result.mailtoUrl, "_blank")
+      }
+
+      setSubmitted(true)
+    } catch {
+      setError("Something went wrong. Please try again or email us directly.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -94,7 +126,7 @@ export function Contact() {
             </div>
           </div>
 
-          {/* Right side — form */}
+          {/* Right side -- form */}
           <div className="rounded-2xl border border-border bg-card p-8">
             {submitted ? (
               <div className="flex h-full flex-col items-center justify-center gap-4 text-center py-12">
@@ -110,9 +142,10 @@ export function Contact() {
               <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="flex flex-col gap-2">
-                    <Label htmlFor="first-name">First name</Label>
+                    <Label htmlFor="first-name">Name</Label>
                     <Input
                       id="first-name"
+                      name="first-name"
                       placeholder="John"
                       required
                       className="rounded-lg"
@@ -122,8 +155,8 @@ export function Contact() {
                     <Label htmlFor="last-name">Last name</Label>
                     <Input
                       id="last-name"
+                      name="last-name"
                       placeholder="Doe"
-                      required
                       className="rounded-lg"
                     />
                   </div>
@@ -133,6 +166,7 @@ export function Contact() {
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
+                    name="email"
                     type="email"
                     placeholder="john@company.com"
                     required
@@ -144,17 +178,17 @@ export function Contact() {
                   <Label htmlFor="company">Company</Label>
                   <Input
                     id="company"
+                    name="company"
                     placeholder="Your company name"
                     className="rounded-lg"
                   />
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="message">
-                    How can we help?
-                  </Label>
+                  <Label htmlFor="message">Message</Label>
                   <Textarea
                     id="message"
+                    name="message"
                     placeholder="Tell us about your automation needs..."
                     rows={4}
                     required
@@ -162,9 +196,27 @@ export function Contact() {
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="mt-2 rounded-full text-base">
-                  Request Free Consultation
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                {error && (
+                  <p className="text-sm text-destructive">{error}</p>
+                )}
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={loading}
+                  className="mt-2 rounded-full text-base"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Request Free Consultation
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </>
+                  )}
                 </Button>
               </form>
             )}
