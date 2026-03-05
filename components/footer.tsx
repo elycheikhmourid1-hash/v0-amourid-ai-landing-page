@@ -7,7 +7,7 @@ export function Footer() {
             <span className="text-xs font-bold text-primary-foreground">A</span>
           </div>
           <span className="text-sm font-bold tracking-tight text-foreground font-mono">
-            AmouridAI
+            AImouridAI
           </span>
         </div>
 
@@ -33,7 +33,7 @@ export function Footer() {
         </nav>
 
         <p className="text-sm text-muted-foreground">
-          {"© 2026 AmouridAI. All rights reserved."}
+          {"© 2026 AImouridAI. All rights reserved."}
         </p>
       </div>
     </footer>

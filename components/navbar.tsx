@@ -21,7 +21,7 @@ export function Navbar() {
             <span className="text-sm font-bold text-primary-foreground">A</span>
           </div>
           <span className="text-lg font-bold tracking-tight text-foreground font-mono">
-            AmouridAI
+            AImouridAI
           </span>
         </a>
 

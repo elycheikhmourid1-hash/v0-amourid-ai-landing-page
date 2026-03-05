@@ -14,9 +14,9 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'AmouridAI - AI Automation for Smarter Business',
+  title: 'AImouridAI - AI Automation for Smarter Business',
   description:
-    'AmouridAI is a Richmond, Virginia-based AI automation startup specializing in Google Forms automation, data analytics, and smart automated responses for businesses.',
+    'AImouridAI is a Richmond, Virginia-based AI automation startup specializing in Google Forms automation, data analytics, and smart automated responses for businesses.',
   icons: {
     icon: [
       {
