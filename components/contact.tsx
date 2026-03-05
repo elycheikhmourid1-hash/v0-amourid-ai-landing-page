@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { ArrowRight, Mail, MapPin, CheckCircle2 } from "lucide-react"
+import { ArrowRight, Mail, MapPin, Phone, Linkedin, CheckCircle2 } from "lucide-react"
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false)
@@ -33,17 +33,35 @@ export function Contact() {
             </p>
 
             <div className="mt-10 flex flex-col gap-6">
-              <div className="flex items-center gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
+              <a
+                href="mailto:elycheikhmourid1@gmail.com"
+                className="flex items-center gap-4 group"
+              >
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary transition-colors group-hover:bg-accent/10">
                   <Mail className="h-5 w-5 text-foreground" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground">Email us</p>
-                  <p className="text-sm text-muted-foreground">
-                    hello@amouridai.com
+                  <p className="text-sm font-medium text-foreground">Email</p>
+                  <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                    elycheikhmourid1@gmail.com
                   </p>
                 </div>
-              </div>
+              </a>
+
+              <a
+                href="tel:+18044853384"
+                className="flex items-center gap-4 group"
+              >
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary transition-colors group-hover:bg-accent/10">
+                  <Phone className="h-5 w-5 text-foreground" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground">Phone</p>
+                  <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                    (804) 485-3384
+                  </p>
+                </div>
+              </a>
 
               <div className="flex items-center gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
@@ -52,10 +70,27 @@ export function Contact() {
                 <div>
                   <p className="text-sm font-medium text-foreground">Location</p>
                   <p className="text-sm text-muted-foreground">
-                    Richmond, Virginia
+                    Richmond, VA, USA
                   </p>
                 </div>
               </div>
+
+              <a
+                href="https://www.linkedin.com/in/ely-cheikh-mourid-7150b12b2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 group"
+              >
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary transition-colors group-hover:bg-accent/10">
+                  <Linkedin className="h-5 w-5 text-foreground" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground">LinkedIn</p>
+                  <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                    Ely Cheikh Mourid
+                  </p>
+                </div>
+              </a>
             </div>
           </div>
 
