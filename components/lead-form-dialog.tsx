@@ -53,8 +53,9 @@ export function LeadFormDialog({ children }: LeadFormDialogProps) {
 
       const result = await res.json()
 
-      if (result.success && result.mailtoUrl) {
-        window.open(result.mailtoUrl, "_blank")
+      if (!res.ok) {
+        setError(result.error || "Failed to send. Please try again.")
+        return
       }
 
       setSubmitted(true)
@@ -85,10 +86,10 @@ export function LeadFormDialog({ children }: LeadFormDialogProps) {
               <CheckCircle2 className="h-7 w-7 text-accent" />
             </div>
             <h3 className="text-xl font-bold text-foreground font-mono">
-              {"You're all set!"}
+              Thank you!
             </h3>
             <p className="max-w-xs text-sm text-muted-foreground leading-relaxed">
-              {"We'll review your automation needs and get back to you within 24 hours with a custom plan."}
+              {"We'll contact you within 24 hours."}
             </p>
             <Button
               onClick={() => handleOpenChange(false)}

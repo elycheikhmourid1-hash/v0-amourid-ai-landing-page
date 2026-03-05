@@ -35,8 +35,9 @@ export function Contact() {
 
       const result = await res.json()
 
-      if (result.success && result.mailtoUrl) {
-        window.open(result.mailtoUrl, "_blank")
+      if (!res.ok) {
+        setError(result.error || "Failed to send. Please try again.")
+        return
       }
 
       setSubmitted(true)
@@ -135,7 +136,7 @@ export function Contact() {
                   Thank you!
                 </h3>
                 <p className="text-muted-foreground">
-                  {"We'll be in touch within 24 hours to schedule your free consultation."}
+                  {"We'll contact you within 24 hours."}
                 </p>
               </div>
             ) : (
