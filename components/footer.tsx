@@ -7,7 +7,7 @@ export function Footer() {
             <span className="text-xs font-bold text-primary-foreground">A</span>
           </div>
           <span className="text-sm font-bold tracking-tight text-foreground font-mono">
-            AImouridAI
+            aicoredigital
           </span>
         </div>
 
