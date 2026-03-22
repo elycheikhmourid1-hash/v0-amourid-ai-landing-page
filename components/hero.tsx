@@ -1,64 +1,55 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
-import { ArrowRight, MapPin, Sparkles } from "lucide-react"
 import { LeadFormDialog } from "@/components/lead-form-dialog"
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[90vh] flex-col items-center justify-center px-6 pt-24 pb-16 text-center">
-      {/* Subtle grid background */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Background Video Layer */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-60"
+        >
+          <source src="/IMG_9780.mov" type="video/quicktime" />
+          <source src="/IMG_9780.mov" type="video/mp4" />
+        </video>
+        {/* Overlay to make text readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/80 to-background" />
+      </div>
 
-      <div className="relative z-10 mx-auto max-w-3xl">
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-4 py-1.5">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-          </span>
-          <span className="text-xs font-medium text-muted-foreground">
-            Now serving businesses across Virginia
-          </span>
+      <div className="container relative z-10 mx-auto px-6 text-center">
+        <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-sm font-medium text-primary mb-8 animate-pulse">
+          🚀 Next-Gen Robotics & AI Automation
         </div>
 
-        <h1 className="text-pretty text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl font-mono">
-          AI Automation for Smarter Business
+        <h1 className="text-5xl md:text-8xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary/80 to-white/70 uppercase">
+          AICore <span className="text-primary">Digital</span>
         </h1>
 
-        <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-          We help businesses automate workflows, unlock data insights, and
-          deliver intelligent responses — so you can focus on what matters most.
+        <p className="mx-auto max-w-[800px] text-xl md:text-2xl text-muted-foreground font-medium mb-12">
+          Bridging the gap between cutting-edge AI software and physical robotic excellence.
+          Your partner in the autonomous revolution.
         </p>
 
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
           <LeadFormDialog>
-            <Button
-              size="lg"
-              className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 px-8 text-base font-semibold shadow-lg shadow-accent/20 gap-2"
-            >
-              <Sparkles className="h-4 w-4" />
-              Try Free Automation Now
-              <ArrowRight className="h-4 w-4" />
+            <Button size="lg" className="h-16 px-10 rounded-full text-xl font-bold bg-primary hover:bg-primary/90 shadow-2xl shadow-primary/30 transition-all hover:scale-105">
+              Transform Your Business
             </Button>
           </LeadFormDialog>
           <Button
-            asChild
             variant="outline"
             size="lg"
-            className="rounded-full px-8 text-base"
+            className="h-16 px-10 rounded-full text-lg font-semibold border-white/20 hover:bg-white/5 backdrop-blur-sm"
+            onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            <a href="#services">Explore Our Services</a>
+            Explore Solutions
           </Button>
-        </div>
-
-        <div className="mt-12 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-          <MapPin className="h-4 w-4" />
-          <span>Based in Richmond, Virginia</span>
         </div>
       </div>
     </section>
