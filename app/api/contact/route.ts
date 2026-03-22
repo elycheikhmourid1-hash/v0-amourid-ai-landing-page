@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+// Here we use the key you saved in Vercel settings
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
@@ -8,17 +9,28 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { firstName, lastName, email, company, message } = body;
 
-    const data = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: 'AICore Digital <onboarding@resend.dev>',
       to: ['contact@aicoredigital.com'],
-      subject: `New Lead: ${firstName} from ${company}`,
+      subject: `New Lead: ${firstName} ${lastName} - ${company}`,
       html: `
-<p><strong>Name:</strong> ${firstName} ${lastName}</p>
+<div style="font-family: Arial, sans-serif; padding: 20px;">
+<h2 style="color: #7c3aed;">New AI Strategy Inquiry</h2>
+<p><strong>Client:</strong> ${firstName} ${lastName}</p>
 <p><strong>Email:</strong> ${email}</p>
-<p><strong>Company:</strong> ${company}</p>
-<p><strong>Message:</strong> ${message}</p>
+<p><strong>Company:</strong> ${company || 'N/A'}</p>
+<p><strong>Message:</strong></p>
+<div style="background: #f4f4f4; padding: 15px; border-radius: 5px;">${message}</div>
+</div>
 `,
     });
 
+    if (error) {
+      return NextResponse.json({ error }, { status: 400 });
+    }
+
     return NextResponse.json({ success: true, data });
   } catch (error) {
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
+}
