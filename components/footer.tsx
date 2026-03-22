@@ -25,23 +25,28 @@ export function Footer() {
             How We Work
           </a>
           <a
-            href="#testimonials"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Testimonials
-          </a>
-          <a
             href="#contact"
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             Contact
           </a>
-        </nav>
+          href="#testimonials"
+          className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+          Testimonials
+        </a>
+        <a
+          href="#contact"
+          className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Contact
+        </a>
+      </nav>
 
-        <p className="text-sm text-muted-foreground">
-          {"© 2026 AImouridAI. All rights reserved."}
-        </p>
-      </div>
-    </footer>
+      <p className="text-sm text-muted-foreground">
+        {"© 2026 AImouridAI. All rights reserved."}
+      </p>
+    </div>
+    </footer >
   )
 }
