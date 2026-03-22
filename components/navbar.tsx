@@ -18,62 +18,71 @@ export function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        {/* Logo Section */}
         <a href="#" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <span className="text-sm font-bold text-primary-foreground">A</span>
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary shadow-lg shadow-primary/20">
+            <span className="text-xs font-black text-primary-foreground leading-none">AI</span>
           </div>
-          <span className="text-lg font-bold tracking-tight text-foreground font-mono">
-            aicoredigital
-          </span>
+          <div className="flex flex-col leading-none">
+            <span className="text-lg font-bold tracking-tighter text-foreground font-mono uppercase">
+              AICore <span className="text-primary text-[0.95em]">Digital</span>
+            </span>
+          </div>
         </a>
 
+        {/* Desktop Navigation */}
         <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm font-medium text-muted-foreground transition-all hover:text-primary"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
+        {/* CTA Button */}
         <div className="hidden md:block">
           <LeadFormDialog>
-            <Button size="default" className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 px-6">
+            <Button size="default" className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-6 font-semibold transition-transform hover:scale-105">
               Free Consultation
             </Button>
           </LeadFormDialog>
         </div>
 
+        {/* Mobile Toggle */}
         <button
-          className="md:hidden text-foreground"
+          className="md:hidden text-foreground p-2"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {mobileOpen ? <X className="h-6 w-6 text-primary" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
+      {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="border-t border-border bg-background px-6 py-4 md:hidden">
-          <nav className="flex flex-col gap-4">
+        <div className="absolute top-full left-0 right-0 border-b border-border bg-background/95 backdrop-blur-lg px-6 py-8 md:hidden shadow-2xl animate-in slide-in-from-top-4 duration-200">
+          <nav className="flex flex-col gap-6 text-center">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="text-lg font-semibold text-muted-foreground transition-colors hover:text-primary"
               >
                 {link.label}
               </a>
             ))}
-            <LeadFormDialog>
-              <Button size="default" className="rounded-full mt-2 bg-accent text-accent-foreground hover:bg-accent/90">
-                Free Consultation
-              </Button>
-            </LeadFormDialog>
+            <div className="pt-4 border-t border-border">
+              <LeadFormDialog>
+                <Button size="lg" className="w-full rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg">
+                  Free Consultation
+                </Button>
+              </LeadFormDialog>
+            </div>
           </nav>
         </div>
       )}
