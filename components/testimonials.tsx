@@ -27,19 +27,19 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="px-6 py-24 bg-secondary/50">
+    <section id="testimonials" className="px-6 py-24 bg-secondary/50" aria-labelledby="testimonials-heading">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-16 max-w-2xl">
+        <header className="mb-16 max-w-2xl">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
             Testimonials
           </p>
-          <h2 className="text-pretty text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-mono">
+          <h2 id="testimonials-heading" className="text-pretty text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-mono text-balance">
             Trusted by businesses that demand results
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
             See what our clients have to say about working with AImouridAI.
           </p>
-        </div>
+        </header>
 
         <div className="grid gap-6 md:grid-cols-3">
           {testimonials.map((t) => (
@@ -49,34 +49,35 @@ export function Testimonials() {
             >
               <CardContent className="flex flex-col gap-6 p-8">
                 {/* Stars */}
-                <div className="flex gap-1">
+                <div className="flex gap-1" role="img" aria-label="5 out of 5 stars">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star
                       key={i}
                       className="h-4 w-4 fill-accent text-accent"
+                      aria-hidden="true"
                     />
                   ))}
                 </div>
 
                 {/* Quote */}
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {`"${t.quote}"`}
-                </p>
+                <blockquote className="text-sm leading-relaxed text-muted-foreground">
+                  <p>{`"${t.quote}"`}</p>
+                </blockquote>
 
                 {/* Author */}
-                <div className="mt-auto flex items-center gap-3 border-t border-border pt-6">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary">
+                <footer className="mt-auto flex items-center gap-3 border-t border-border pt-6">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary" aria-hidden="true">
                     <span className="text-xs font-bold text-primary-foreground">
                       {t.initials}
                     </span>
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-foreground">
+                    <cite className="text-sm font-semibold text-foreground not-italic">
                       {t.name}
-                    </p>
+                    </cite>
                     <p className="text-xs text-muted-foreground">{t.role}</p>
                   </div>
-                </div>
+                </footer>
               </CardContent>
             </Card>
           ))}

@@ -16,10 +16,10 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border" role="banner">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         {/* Logo Section */}
-        <a href="#" className="flex items-center gap-2">
+        <a href="#" className="flex items-center gap-2" aria-label="AICore Digital - Go to homepage">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary shadow-lg shadow-primary/20">
             <span className="text-xs font-black text-primary-foreground leading-none">AI</span>
           </div>
@@ -31,7 +31,7 @@ export function Navbar() {
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -64,8 +64,8 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="absolute top-full left-0 right-0 border-b border-border bg-background/95 backdrop-blur-lg px-6 py-8 md:hidden shadow-2xl animate-in slide-in-from-top-4 duration-200">
-          <nav className="flex flex-col gap-6 text-center">
+        <div className="absolute top-full left-0 right-0 border-b border-border bg-background/95 backdrop-blur-lg px-6 py-8 md:hidden shadow-2xl animate-in slide-in-from-top-4 duration-200" role="dialog" aria-label="Mobile menu">
+          <nav className="flex flex-col gap-6 text-center" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <a
                 key={link.href}

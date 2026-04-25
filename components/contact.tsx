@@ -29,9 +29,9 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 px-6 bg-slate-950 text-white">
+    <section id="contact" className="py-24 px-6 bg-slate-950 text-white" aria-labelledby="contact-heading">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-4xl font-bold mb-8 font-mono">Start Your AI Transformation</h2>
+        <h2 id="contact-heading" className="text-4xl font-bold mb-8 font-mono text-balance">Start Your AI Transformation</h2>
         {submitted ? (
           <div className="bg-primary/20 p-8 rounded-xl border border-primary">
             <CheckCircle2 className="w-12 h-12 mx-auto mb-4 text-primary" />

@@ -9,15 +9,17 @@ import { FloatingCta } from "@/components/floating-cta"
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Navbar />
-      <Hero />
-      <Services />
-      <HowWeWork />
-      <Testimonials />
-      <Contact />
+      <main id="main-content">
+        <Hero />
+        <Services />
+        <HowWeWork />
+        <Testimonials />
+        <Contact />
+      </main>
       <Footer />
       <FloatingCta />
-    </main>
+    </>
   )
 }
