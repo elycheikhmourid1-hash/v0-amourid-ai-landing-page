@@ -28,8 +28,9 @@ export function FloatingCta() {
         <Button
           size="lg"
           className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/25 px-6 text-sm font-semibold gap-2"
+          aria-label="Request free automation consultation"
         >
-          <Sparkles className="h-4 w-4" />
+          <Sparkles className="h-4 w-4" aria-hidden="true" />
           <span className="hidden sm:inline">Try Free Automation Now</span>
           <span className="sm:hidden">Free Consultation</span>
         </Button>

@@ -27,20 +27,20 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="px-6 py-24">
+    <section id="services" className="px-6 py-24" aria-labelledby="services-heading">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-16 max-w-2xl">
+        <header className="mb-16 max-w-2xl">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
             What we do
           </p>
-          <h2 className="text-pretty text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-mono">
+          <h2 id="services-heading" className="text-pretty text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-mono text-balance">
             Automation that works as hard as you do
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
             Our suite of AI automation services covers every stage of your
             business operations — from data collection to customer engagement.
           </p>
-        </div>
+        </header>
 
         <div className="grid gap-6 md:grid-cols-3">
           {services.map((service) => (
@@ -49,7 +49,7 @@ export function Services() {
               className="group border-border bg-card transition-all hover:border-foreground/20 hover:shadow-lg"
             >
               <CardContent className="p-8">
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-secondary">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-secondary" aria-hidden="true">
                   <service.icon className="h-6 w-6 text-foreground" />
                 </div>
 

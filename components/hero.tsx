@@ -5,14 +5,18 @@ import { LeadFormDialog } from "@/components/lead-form-dialog"
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section 
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      aria-labelledby="hero-heading"
+    >
       {/* Background Video Layer */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0" aria-hidden="true">
         <video
           autoPlay
           loop
           muted
           playsInline
+          preload="metadata"
           className="w-full h-full object-cover opacity-60"
         >
           <source src="/IMG_9780.mov" type="video/quicktime" />
@@ -23,15 +27,19 @@ export function Hero() {
       </div>
 
       <div className="container relative z-10 mx-auto px-6 text-center">
-        <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-sm font-medium text-primary mb-8 animate-pulse">
-          🚀 Next-Gen Robotics & AI Automation
-        </div>
+        <p className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-sm font-medium text-primary mb-8 animate-pulse">
+          <span aria-hidden="true">🚀</span>
+          <span className="ml-1">Next-Gen Robotics & AI Automation</span>
+        </p>
 
-        <h1 className="text-5xl md:text-8xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary/80 to-white/70 uppercase">
+        <h1 
+          id="hero-heading"
+          className="text-5xl md:text-8xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary/80 to-white/70 uppercase text-balance"
+        >
           AICore <span className="text-primary">Digital</span>
         </h1>
 
-        <p className="mx-auto max-w-[800px] text-xl md:text-2xl text-muted-foreground font-medium mb-12">
+        <p className="mx-auto max-w-[800px] text-xl md:text-2xl text-muted-foreground font-medium mb-12 text-pretty">
           Bridging the gap between cutting-edge AI software and physical robotic excellence.
           Your partner in the autonomous revolution.
         </p>
