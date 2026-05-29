@@ -30,6 +30,8 @@ type Workflow = {
   hoursSavedPerWeek: number
   monthlyTaskRuns: number
   complexity: "Simple" | "Moderate" | "Advanced"
+  executionTime?: string
+  status?: string
 }
 
 const EXAMPLES = [
@@ -248,6 +250,23 @@ export function AutomationSimulator() {
                 <p className="mx-auto mt-2 max-w-2xl text-pretty text-muted-foreground">
                   {workflow.summary}
                 </p>
+
+                {/* Live execution telemetry */}
+                <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/5 px-3 py-1.5 text-sm font-medium text-foreground">
+                    <Clock className="h-4 w-4 text-cyan-400" />
+                    Execution Time:{" "}
+                    <span className="font-mono text-cyan-400">{workflow.executionTime ?? "1.2s"}</span>
+                  </span>
+                  <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/5 px-3 py-1.5 text-sm font-medium text-foreground">
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                    </span>
+                    Status:{" "}
+                    <span className="text-emerald-400">{workflow.status ?? "Active & Automated"}</span>
+                  </span>
+                </div>
               </div>
 
               {/* Node graph */}
