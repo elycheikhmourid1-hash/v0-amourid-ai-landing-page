@@ -33,6 +33,7 @@ type Workflow = {
 }
 
 const EXAMPLES = [
+  "Personalize sales outreach emails for new leads in Google Sheets",
   "Sync my CRM with custom Telegram alerts and Google Sheets",
   "When a customer pays on Stripe, send an invoice and onboard them in Notion",
   "Triage incoming support emails and draft replies with AI",

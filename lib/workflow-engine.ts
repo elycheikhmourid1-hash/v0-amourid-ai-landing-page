@@ -72,8 +72,40 @@ function detectAiStep(text: string): WorkflowNode {
   return { id: "n2", kind: "ai", title: "AI Processing", detail: "The payload is analyzed, structured, and routed by an AI reasoning step.", tool: "Claude API" }
 }
 
+// Curated, production-grade template that mirrors AICore Digital's real
+// Make.com "Sales Outreach Agent" scenario, returned verbatim when the user's
+// problem clearly maps to lead outreach.
+function salesOutreachTemplate(): Workflow {
+  return {
+    title: "Sales Outreach Agent",
+    summary:
+      "A new lead in Google Sheets is enriched, personalized by Claude, emailed via Gmail automatically, and its status is written back — fully hands-off.",
+    nodes: [
+      { id: "n1", kind: "trigger", title: "New Lead Row", detail: "A new lead added to Google Sheets triggers the scenario instantly.", tool: "Google Sheets" },
+      { id: "n2", kind: "action", title: "Enrich Data", detail: "An HTTP request enriches the lead with company and contact details.", tool: "HTTP" },
+      { id: "n3", kind: "ai", title: "Personalize Outreach", detail: "Anthropic Claude drafts a tailored, human-quality outreach email.", tool: "Claude API" },
+      { id: "n4", kind: "action", title: "Send Email", detail: "Gmail sends the personalized email to the lead automatically.", tool: "Gmail" },
+      { id: "n5", kind: "action", title: "Update Status", detail: "The lead's status is written back to Google Sheets as 'Contacted'.", tool: "Google Sheets" },
+    ],
+    hoursSavedPerWeek: 18,
+    monthlyTaskRuns: 1200,
+    complexity: "Advanced",
+  }
+}
+
+function isSalesOutreach(text: string): boolean {
+  const t = text.toLowerCase()
+  const outreach = /\b(outreach|cold email|cold outreach|sales email|prospect|prospecting|personalized email|reach out)\b/.test(t)
+  const leadFlow = /\b(lead|leads)\b/.test(t) && /\b(email|gmail|outreach|enrich|personali[sz]e)\b/.test(t)
+  return outreach || leadFlow
+}
+
 export function buildHeuristicWorkflow(problem: string): Workflow {
   const text = problem.trim()
+
+  // Highest-priority: our flagship sales outreach scenario.
+  if (isSalesOutreach(text)) return salesOutreachTemplate()
+
   const trigger = detectTrigger(text)
   const ai = detectAiStep(text)
 

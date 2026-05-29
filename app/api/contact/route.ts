@@ -2,9 +2,15 @@ import { NextResponse } from "next/server"
 import { Resend } from "resend"
 import { insertLead } from "@/lib/db"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const TO_EMAIL = "elycheikhmourid1@gmail.com"
+
+// Lazily create the client at request time so a missing key never crashes the
+// production build (page-data collection) — it only affects email at runtime.
+function getResend(): Resend | null {
+  const key = process.env.RESEND_API_KEY
+  if (!key) return null
+  return new Resend(key)
+}
 
 export async function POST(request: Request) {
   try {
@@ -83,21 +89,26 @@ export async function POST(request: Request) {
     `
 
     let emailSent = false
-    try {
-      const { error } = await resend.emails.send({
-        from: "AICore Digital <onboarding@resend.dev>",
-        to: TO_EMAIL,
-        replyTo: email,
-        subject,
-        html,
-      })
-      if (error) {
-        console.error("[v0] Resend error:", error)
-      } else {
-        emailSent = true
+    const resend = getResend()
+    if (resend) {
+      try {
+        const { error } = await resend.emails.send({
+          from: "AICore Digital <onboarding@resend.dev>",
+          to: TO_EMAIL,
+          replyTo: email,
+          subject,
+          html,
+        })
+        if (error) {
+          console.error("[v0] Resend error:", error)
+        } else {
+          emailSent = true
+        }
+      } catch (mailErr) {
+        console.error("[v0] Resend threw:", mailErr)
       }
-    } catch (mailErr) {
-      console.error("[v0] Resend threw:", mailErr)
+    } else {
+      console.warn("[v0] RESEND_API_KEY not set — skipping email, lead is still saved to DB.")
     }
 
     // As long as the lead is safely stored OR the email went out, it's a success.
