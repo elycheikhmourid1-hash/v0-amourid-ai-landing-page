@@ -156,6 +156,39 @@
   animation-delay: var(--twinkle-delay, 0s);
 }
 
+/* ===== AICore premium logo animations ===== */
+@keyframes logo-spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes logo-spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+@keyframes logo-orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes logo-core-pulse {
+  0%, 100% { opacity: 0.85; transform: scale(0.92); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+@keyframes logo-dash {
+  to { stroke-dashoffset: -240; }
+}
+
+.logo-ring-outer { transform-origin: center; animation: logo-spin-slow 18s linear infinite; }
+.logo-ring-mid { transform-origin: center; animation: logo-spin-reverse 12s linear infinite; }
+.logo-orbit { transform-origin: center; animation: logo-orbit 6s linear infinite; }
+.logo-core { transform-origin: center; animation: logo-core-pulse 2.6s ease-in-out infinite; }
+.logo-trace { stroke-dasharray: 6 10; animation: logo-dash 4s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-ring-outer, .logo-ring-mid, .logo-orbit, .logo-core, .logo-trace {
+    animation: none;
+  }
+}
+
 /* Glow effects */
 .glow-purple {
   box-shadow: 0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.1);
