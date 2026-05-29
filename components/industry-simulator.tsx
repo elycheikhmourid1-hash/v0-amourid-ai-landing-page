@@ -105,12 +105,12 @@ export function IndustrySimulator() {
   }, [activeTab, stepCount, reduceMotion])
 
   return (
-    <section id="simulator" className="relative px-6 py-24">
+    <section id="industries" className="relative px-6 py-24">
       <div className="mx-auto max-w-6xl">
         {/* Heading */}
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
-            Interactive Simulator
+            Industry Playbooks
           </p>
           <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
             See automation work for <span className="text-primary">your</span> business

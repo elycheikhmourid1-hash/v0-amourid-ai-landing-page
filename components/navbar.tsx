@@ -8,9 +8,9 @@ import { LogoMark } from "@/components/logo"
 
 const navLinks = [
   { label: "Simulator", href: "#simulator" },
+  { label: "Playground", href: "#playground" },
+  { label: "Industries", href: "#industries" },
   { label: "Services", href: "#services" },
-  { label: "How We Work", href: "#how-we-work" },
-  { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ]
 
