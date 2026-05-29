@@ -46,17 +46,6 @@ export function Hero() {
         animate="show"
         className="container relative z-10 mx-auto px-6 text-center"
       >
-        <motion.div variants={item} className="mb-8 flex justify-center">
-          <div className="relative float-soft">
-            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-fuchsia-600 via-purple-600 to-cyan-500 blur-md opacity-80 animate-pulse" />
-            <img
-              src="/founder-photo.jpg"
-              alt="Founder of AICore Digital"
-              className="relative h-32 w-32 md:h-40 md:w-40 rounded-full object-cover object-top border-2 border-white/20 shadow-2xl"
-            />
-          </div>
-        </motion.div>
-
         <motion.div
           variants={item}
           className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-sm font-medium text-foreground mb-8"
