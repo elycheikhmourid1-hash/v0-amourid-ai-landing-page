@@ -15,10 +15,7 @@ export function Hero() {
           playsInline
           className="w-full h-full object-cover opacity-60"
         >
-          <source
-            src="/AQNy3UlGNc0EQBkRwgORSAH8Ybq1AiWKJL5ubq-ZdzR_dFH_tUiavNj9H1GEISwH3i-SStMTGB06V_W7MDWmJVmHK-25x1XF567iVdejbw.mp4"
-            type="video/mp4"
-          />
+          <source src="/agency-background.mp4" type="video/mp4" />
         </video>
         {/* Overlay to make text readable */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/80 to-background" />
