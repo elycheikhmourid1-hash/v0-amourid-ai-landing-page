@@ -18,8 +18,10 @@ import {
   Utensils,
   Stethoscope,
   Warehouse,
+  Bot,
   type LucideIcon,
 } from "lucide-react"
+import { SalesOutreachFlow } from "@/components/sales-outreach-flow"
 
 type Step = {
   icon: LucideIcon
@@ -80,17 +82,28 @@ const INDUSTRIES: Industry[] = [
 
 const STEP_INTERVAL = 1600
 
+// The featured production template (mirrors a real Make.com scenario)
+const SALES_TAB = {
+  id: "sales-outreach",
+  label: "Sales Outreach Agent",
+  tabIcon: Bot,
+  result: "Every new lead gets a personalized, human-quality email in ~1.2s — fully hands-off.",
+}
+
 export function IndustrySimulator() {
+  // Tab 0 = featured Sales Outreach Agent, tabs 1..n = industry playbooks
   const [activeTab, setActiveTab] = useState(0)
   const [activeStep, setActiveStep] = useState(0)
   const reduceMotion = useReducedMotion()
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  const industry = INDUSTRIES[activeTab]
-  const stepCount = industry.steps.length
+  const isSales = activeTab === 0
+  const industry = isSales ? null : INDUSTRIES[activeTab - 1]
+  const stepCount = industry?.steps.length ?? 0
 
-  // Auto-advance the active step in a loop
+  // Auto-advance the active step in a loop (industry templates only)
   useEffect(() => {
+    if (isSales || stepCount === 0) return
     if (reduceMotion) {
       setActiveStep(stepCount - 1)
       return
@@ -102,7 +115,7 @@ export function IndustrySimulator() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
     }
-  }, [activeTab, stepCount, reduceMotion])
+  }, [activeTab, stepCount, isSales, reduceMotion])
 
   return (
     <section id="industries" className="relative px-6 py-24">
@@ -120,21 +133,21 @@ export function IndustrySimulator() {
           </p>
         </div>
 
-        {/* Tabs */}
+        {/* Template tabs */}
         <div
           role="tablist"
-          aria-label="Industry workflows"
-          className="mx-auto mb-12 flex max-w-2xl flex-wrap items-center justify-center gap-3"
+          aria-label="Automation templates"
+          className="mx-auto mb-12 flex max-w-3xl flex-wrap items-center justify-center gap-3"
         >
-          {INDUSTRIES.map((ind, i) => {
-            const TabIcon = ind.tabIcon
+          {[SALES_TAB, ...INDUSTRIES].map((tab, i) => {
+            const TabIcon = tab.tabIcon
             const selected = i === activeTab
             return (
               <button
-                key={ind.id}
+                key={tab.id}
                 role="tab"
                 aria-selected={selected}
-                aria-controls={`panel-${ind.id}`}
+                aria-controls={`panel-${tab.id}`}
                 onClick={() => setActiveTab(i)}
                 className={`tactile relative flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
                   selected
@@ -150,7 +163,7 @@ export function IndustrySimulator() {
                   />
                 )}
                 <TabIcon className="h-4 w-4" />
-                {ind.label}
+                {tab.label}
               </button>
             )
           })}
@@ -158,13 +171,46 @@ export function IndustrySimulator() {
 
         {/* Workflow stage */}
         <div
-          id={`panel-${industry.id}`}
+          id={`panel-${isSales ? SALES_TAB.id : industry?.id}`}
           role="tabpanel"
           className="glass-strong relative overflow-hidden rounded-3xl border border-white/10 p-6 sm:p-10"
         >
           {/* ambient glow inside stage */}
           <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-purple-600/20 blur-3xl" />
 
+          {/* Featured production scenario: AI Core Digital — Sales Outreach Agent */}
+          {isSales && (
+            <div className="relative">
+              <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/15 text-primary">
+                    <Bot className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="text-sm font-bold text-foreground">AI Core Digital — Sales Outreach Agent</p>
+                    <p className="text-xs text-muted-foreground">Live production scenario · 5 connected modules</p>
+                  </div>
+                </div>
+                <span className="rounded-full border border-white/10 bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground">
+                  Make.com workflow
+                </span>
+              </div>
+
+              <SalesOutreachFlow />
+
+              <div className="mt-6 flex items-center gap-3 rounded-2xl border border-emerald-400/20 bg-emerald-400/5 px-5 py-4">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-400">
+                  <TrendingUp className="h-5 w-5" />
+                </span>
+                <p className="text-pretty text-sm font-medium text-foreground sm:text-base">
+                  <span className="font-bold text-emerald-400">The result:</span> {SALES_TAB.result}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {!isSales && industry && (
+          <>
           <AnimatePresence mode="wait">
             <motion.div
               key={industry.id}
@@ -283,6 +329,8 @@ export function IndustrySimulator() {
               </p>
             </motion.div>
           </AnimatePresence>
+          </>
+          )}
         </div>
       </div>
     </section>
