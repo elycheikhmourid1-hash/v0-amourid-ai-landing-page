@@ -10,10 +10,14 @@ const ALLOWED_STATUSES = ["new", "contacted", "won", "lost"] as const
 export async function login(_prevState: { error?: string } | undefined, formData: FormData) {
   const password = String(formData.get("password") ?? "")
 
+  console.log("[v0] login attempt: received len", password.length, "expected len", (process.env.DASHBOARD_PASSWORD ?? "").length, "secretSet", !!process.env.DASHBOARD_SECRET)
+
   if (!checkPassword(password)) {
+    console.log("[v0] login: password mismatch")
     return { error: "Incorrect password" }
   }
 
+  console.log("[v0] login: success, creating session")
   await createSession()
   redirect("/admin")
 }
