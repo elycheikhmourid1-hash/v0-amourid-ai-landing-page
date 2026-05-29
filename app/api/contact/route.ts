@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { Resend } from "resend"
+import { insertLead } from "@/lib/db"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -30,6 +31,24 @@ export async function POST(request: Request) {
         { error: "Name, email, and message are required." },
         { status: 400 }
       )
+    }
+
+    const fullName = `${firstName}${lastName ? ` ${lastName}` : ""}`
+
+    // 1) Persist the lead FIRST so it is never lost, even if email fails.
+    let storedLead = false
+    try {
+      await insertLead({
+        name: fullName,
+        email,
+        phone: phone ?? null,
+        company: company ?? null,
+        message,
+        source: source === "lead-form" ? "lead-form" : "contact",
+      })
+      storedLead = true
+    } catch (dbErr) {
+      console.error("[v0] DB insert error:", dbErr)
     }
 
     const isLeadForm = source === "lead-form"
@@ -63,23 +82,33 @@ export async function POST(request: Request) {
       </div>
     `
 
-    const { error } = await resend.emails.send({
-      from: "AICore Digital <onboarding@resend.dev>",
-      to: TO_EMAIL,
-      replyTo: email,
-      subject,
-      html,
-    })
-
-    if (error) {
-      console.error("[v0] Resend error:", error)
-      return NextResponse.json(
-        { error: "Failed to send. Please try again." },
-        { status: 500 }
-      )
+    let emailSent = false
+    try {
+      const { error } = await resend.emails.send({
+        from: "AICore Digital <onboarding@resend.dev>",
+        to: TO_EMAIL,
+        replyTo: email,
+        subject,
+        html,
+      })
+      if (error) {
+        console.error("[v0] Resend error:", error)
+      } else {
+        emailSent = true
+      }
+    } catch (mailErr) {
+      console.error("[v0] Resend threw:", mailErr)
     }
 
-    return NextResponse.json({ success: true })
+    // As long as the lead is safely stored OR the email went out, it's a success.
+    if (storedLead || emailSent) {
+      return NextResponse.json({ success: true })
+    }
+
+    return NextResponse.json(
+      { error: "Something went wrong. Please try again." },
+      { status: 500 }
+    )
   } catch (err) {
     console.error("[v0] Contact route error:", err)
     return NextResponse.json(
