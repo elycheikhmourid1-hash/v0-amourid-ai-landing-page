@@ -20,8 +20,8 @@ export function Founder() {
             <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-fuchsia-600/30 via-purple-600/20 to-cyan-500/30 blur-2xl" />
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-card shadow-2xl shadow-purple-900/40">
               <Image
-                src="/founder-avatar.png"
-                alt="Illustrated portrait of the founder of AICore Digital"
+                src="/founder-photo.jpg"
+                alt="Portrait of the founder of AICore Digital"
                 width={640}
                 height={640}
                 className="h-auto w-full object-cover"

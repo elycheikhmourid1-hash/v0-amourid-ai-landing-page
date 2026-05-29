@@ -26,9 +26,9 @@ export function Hero() {
           <div className="relative">
             <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-fuchsia-600 via-purple-600 to-cyan-500 blur-md opacity-80 animate-pulse" />
             <img
-              src="/founder-avatar.png"
+              src="/founder-photo.jpg"
               alt="Founder of AICore Digital"
-              className="relative h-32 w-32 md:h-40 md:w-40 rounded-full object-cover border-2 border-white/20 shadow-2xl"
+              className="relative h-32 w-32 md:h-40 md:w-40 rounded-full object-cover object-top border-2 border-white/20 shadow-2xl"
             />
           </div>
         </div>
