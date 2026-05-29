@@ -37,14 +37,17 @@ export function Hero() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
           <LeadFormDialog>
-            <Button size="lg" className="h-16 px-10 rounded-full text-xl font-bold bg-primary hover:bg-primary/90 shadow-2xl shadow-primary/30 transition-all hover:scale-105">
+            <Button
+              size="lg"
+              className="h-16 px-10 rounded-full text-xl font-bold text-white bg-gradient-to-r from-fuchsia-600 via-purple-600 to-cyan-500 hover:from-fuchsia-500 hover:via-purple-500 hover:to-cyan-400 shadow-2xl shadow-purple-600/40 transition-all hover:scale-105 border-0"
+            >
               Transform Your Business
             </Button>
           </LeadFormDialog>
           <Button
             variant="outline"
             size="lg"
-            className="h-16 px-10 rounded-full text-lg font-semibold border-white/20 hover:bg-white/5 backdrop-blur-sm"
+            className="h-16 px-10 rounded-full text-lg font-semibold text-white border-2 border-cyan-400/50 hover:border-cyan-400 hover:bg-cyan-400/10 backdrop-blur-sm transition-all"
             onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Explore Solutions
