@@ -64,7 +64,7 @@ export async function POST(request: Request) {
     `
 
     const { error } = await resend.emails.send({
-      from: "AImouridAI <onboarding@resend.dev>",
+      from: "AICore Digital <onboarding@resend.dev>",
       to: TO_EMAIL,
       replyTo: email,
       subject,

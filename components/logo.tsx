@@ -56,7 +56,7 @@ export function Logo({ size = "md", showText = true }: LogoProps) {
 
       {showText && (
         <span className={`font-bold tracking-tight font-mono ${s.text} gradient-text`}>
-          AIMOURIDAI
+          AICORE DIGITAL
         </span>
       )}
     </div>
@@ -73,7 +73,7 @@ export function LogoSimple({ className = "" }: { className?: string }) {
         </div>
       </div>
       <span className="font-bold tracking-tight font-mono gradient-text">
-        AIMOURIDAI
+        AICORE DIGITAL
       </span>
     </div>
   )
