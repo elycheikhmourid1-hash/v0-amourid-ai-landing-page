@@ -7,10 +7,10 @@ import { LeadFormDialog } from "@/components/lead-form-dialog"
 import { LogoMark } from "@/components/logo"
 
 const navLinks = [
+  { label: "Simulator", href: "#simulator" },
   { label: "Services", href: "#services" },
   { label: "How We Work", href: "#how-we-work" },
   { label: "Testimonials", href: "#testimonials" },
-  { label: "Founder", href: "#founder" },
   { label: "Contact", href: "#contact" },
 ]
 

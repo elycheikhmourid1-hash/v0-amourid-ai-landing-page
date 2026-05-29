@@ -21,20 +21,11 @@ const item = {
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Video Layer */}
-      <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover opacity-50"
-        >
-          <source src="/agency-background.mp4" type="video/mp4" />
-        </video>
-        {/* Overlay to make text readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
-      </div>
+      {/* Ultra-light CSS grid + glow backdrop (zero video weight) */}
+      <div className="absolute inset-0 z-0 hero-grid" aria-hidden="true" />
+      <div className="absolute inset-0 z-0 hero-glow" aria-hidden="true" />
+      {/* Fade the backdrop into the page */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-transparent via-background/30 to-background" aria-hidden="true" />
 
       {/* Interactive data network layer */}
       <div className="absolute inset-0 z-[1]">

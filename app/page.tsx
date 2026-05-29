@@ -1,9 +1,9 @@
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
+import { IndustrySimulator } from "@/components/industry-simulator"
 import { Services } from "@/components/services"
 import { HowWeWork } from "@/components/how-we-work"
 import { Testimonials } from "@/components/testimonials"
-import { Founder } from "@/components/founder"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
 import { FloatingCta } from "@/components/floating-cta"
@@ -13,10 +13,10 @@ export default function Home() {
     <main>
       <Navbar />
       <Hero />
+      <IndustrySimulator />
       <Services />
       <HowWeWork />
       <Testimonials />
-      <Founder />
       <Contact />
       <Footer />
       <FloatingCta />
