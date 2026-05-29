@@ -4,20 +4,20 @@ import { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence, useReducedMotion } from "motion/react"
 import {
   MessageCircle,
-  Workflow,
-  ChefHat,
-  ReceiptText,
+  MonitorCheck,
+  Bike,
+  TrendingUp,
   CalendarPlus,
   CalendarCheck,
-  Send,
-  ShieldCheck,
-  PackagePlus,
-  Truck,
-  Boxes,
   MapPin,
+  BellRing,
+  ShoppingCart,
+  PackageMinus,
+  Factory,
+  Truck,
   Utensils,
   Stethoscope,
-  PackageCheck,
+  Warehouse,
   type LucideIcon,
 } from "lucide-react"
 
@@ -32,44 +32,48 @@ type Industry = {
   label: string
   tabIcon: LucideIcon
   accent: string // tailwind text color for the icon glow
+  result: string // payoff outcome shown to the business owner
   steps: Step[]
 }
 
 const INDUSTRIES: Industry[] = [
   {
     id: "restaurants",
-    label: "Restaurants",
+    label: "Smart Restaurants",
     tabIcon: Utensils,
     accent: "text-orange-400",
+    result: "Zero missed orders. Owner sees every dirham land in real time.",
     steps: [
-      { icon: MessageCircle, title: "Order received", detail: "Customer messages via WhatsApp or Telegram" },
-      { icon: Workflow, title: "Automation fires", detail: "Data instantly lights up the workflow path" },
-      { icon: ChefHat, title: "Kitchen notified", detail: "Order sent straight to the kitchen display" },
-      { icon: ReceiptText, title: "Books updated", detail: "Invoice prints & accounting sheet updates" },
+      { icon: MessageCircle, title: "Customer orders", detail: "Order placed via Telegram or WhatsApp bot" },
+      { icon: MonitorCheck, title: "Kitchen fires", detail: "Synced to the kitchen screen & ticket printer" },
+      { icon: Bike, title: "Driver notified", detail: "Nearest delivery driver auto-dispatched" },
+      { icon: TrendingUp, title: "Revenue updates", detail: "Owner's phone dashboard updates instantly" },
     ],
   },
   {
     id: "hospitals",
-    label: "Hospitals & Clinics",
+    label: "AI Healthcare",
     tabIcon: Stethoscope,
     accent: "text-cyan-400",
+    result: "Fewer no-shows. Calendars, reminders & confirmations run themselves.",
     steps: [
-      { icon: CalendarPlus, title: "Patient books", detail: "Appointment scheduled online in seconds" },
-      { icon: CalendarCheck, title: "Calendar syncs", detail: "Doctor's calendar updates dynamically" },
-      { icon: Send, title: "Confirmation sent", detail: "Automated WhatsApp confirmation dispatched" },
-      { icon: ShieldCheck, title: "Claim prepared", detail: "Insurance claim instantly assembled" },
+      { icon: CalendarPlus, title: "Patient books", detail: "Appointment booked online in seconds" },
+      { icon: CalendarCheck, title: "Calendar updates", detail: "Doctor's calendar adjusts dynamically" },
+      { icon: MapPin, title: "Confirm + GPS", detail: "WhatsApp confirmation sent with clinic GPS" },
+      { icon: BellRing, title: "24h reminder", detail: "Auto reminder to confirm or reschedule" },
     ],
   },
   {
-    id: "logistics",
-    label: "Logistics & Shipping",
-    tabIcon: Truck,
+    id: "ecommerce",
+    label: "E-Commerce & Warehouses",
+    tabIcon: Warehouse,
     accent: "text-emerald-400",
+    result: "Never out of stock. Restocking & shipping happen without lifting a finger.",
     steps: [
-      { icon: PackagePlus, title: "Order created", detail: "New delivery order enters the system" },
-      { icon: MapPin, title: "Driver assigned", detail: "Nearest available driver auto-selected" },
-      { icon: Boxes, title: "Stock synced", detail: "Inventory levels update in real-time" },
-      { icon: PackageCheck, title: "Tracking sent", detail: "Live tracking link shot to the client" },
+      { icon: ShoppingCart, title: "Customer buys", detail: "New order placed on the online store" },
+      { icon: PackageMinus, title: "Stock deducted", detail: "Inventory auto-updates in real time" },
+      { icon: Factory, title: "Reorder fires", detail: "Low stock (< 3) triggers a supplier PO" },
+      { icon: Truck, title: "Label sent", detail: "Shipping label generated & sent to courier" },
     ],
   },
 ]
@@ -260,6 +264,25 @@ export function IndustrySimulator() {
               transition={{ duration: 0.4, ease: "easeOut" }}
             />
           </div>
+
+          {/* Payoff / result banner */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={industry.id}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-6 flex items-center gap-3 rounded-2xl border border-emerald-400/20 bg-emerald-400/5 px-5 py-4"
+            >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-400">
+                <TrendingUp className="h-5 w-5" />
+              </span>
+              <p className="text-pretty text-sm font-medium text-foreground sm:text-base">
+                <span className="font-bold text-emerald-400">The result:</span> {industry.result}
+              </p>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>
