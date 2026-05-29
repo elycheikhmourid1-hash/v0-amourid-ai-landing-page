@@ -22,6 +22,17 @@ export function Hero() {
       </div>
 
       <div className="container relative z-10 mx-auto px-6 text-center">
+        <div className="mb-8 flex justify-center">
+          <div className="relative">
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-fuchsia-600 via-purple-600 to-cyan-500 blur-md opacity-80 animate-pulse" />
+            <img
+              src="/founder-avatar.png"
+              alt="Founder of AICore Digital"
+              className="relative h-32 w-32 md:h-40 md:w-40 rounded-full object-cover border-2 border-white/20 shadow-2xl"
+            />
+          </div>
+        </div>
+
         <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-sm font-medium text-primary mb-8 animate-pulse">
           🚀 Next-Gen Robotics & AI Automation
         </div>
