@@ -30,8 +30,18 @@ export function Footer() {
           >
             Testimonials
           </a>
+          <a
+            href="#contact"
+            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Contact
+          </a>
         </nav>
+
+        <p className="text-sm text-muted-foreground">
+          {"© 2026 AICore Digital. All rights reserved."}
+        </p>
       </div>
     </footer>
-  );
+  )
 }

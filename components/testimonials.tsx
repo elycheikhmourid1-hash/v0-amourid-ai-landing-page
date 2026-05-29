@@ -6,7 +6,7 @@ const testimonials = [
     name: "Sarah Mitchell",
     role: "Operations Manager, BrightPath Logistics",
     quote:
-      "AImouridAI completely transformed how we handle incoming orders. What used to take our team hours every morning is now fully automated. We've saved over 20 hours a week.",
+      "AICore Digital completely transformed how we handle incoming orders. What used to take our team hours every morning is now fully automated. We've saved over 20 hours a week.",
     initials: "SM",
   },
   {
@@ -37,7 +37,7 @@ export function Testimonials() {
             Trusted by businesses that demand results
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            See what our clients have to say about working with AImouridAI.
+            See what our clients have to say about working with AICore Digital.
           </p>
         </div>
 

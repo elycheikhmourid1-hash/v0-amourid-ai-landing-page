@@ -36,6 +36,7 @@ export function LeadFormDialog({ children }: LeadFormDialogProps) {
       email: formData.get("lead-email") as string,
       phone: formData.get("lead-phone") as string,
       automationNeeds: formData.get("lead-message") as string,
+      trap: formData.get("_trap") as string,
     }
 
     try {
@@ -48,6 +49,7 @@ export function LeadFormDialog({ children }: LeadFormDialogProps) {
           phone: data.phone,
           message: data.automationNeeds,
           source: "lead-form",
+          _trap: data.trap,
         }),
       })
 
@@ -116,6 +118,7 @@ export function LeadFormDialog({ children }: LeadFormDialogProps) {
             </DialogHeader>
 
             <form onSubmit={handleSubmit} className="mt-2 flex flex-col gap-4">
+              <input type="text" name="_trap" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
               <div className="flex flex-col gap-2">
                 <Label htmlFor="lead-name" className="text-sm font-medium text-foreground">
                   Name <span className="text-destructive">*</span>

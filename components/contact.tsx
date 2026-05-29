@@ -40,6 +40,7 @@ export function Contact() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="grid gap-6 text-left bg-slate-900 p-8 rounded-2xl border border-slate-800">
+            <input type="text" name="_trap" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="firstName">First Name</Label>

@@ -1,5 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card"
 import { FileText, BarChart3, MessageSquare } from "lucide-react"
+import { TiltCard } from "@/components/tilt-card"
+import { Reveal } from "@/components/reveal"
 
 const services = [
   {
@@ -27,30 +28,27 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="px-6 py-24">
+    <section id="services" className="relative px-6 py-24">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-16 max-w-2xl">
+        <Reveal className="mb-16 max-w-2xl">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
             What we do
           </p>
-          <h2 className="text-pretty text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-mono">
+          <h2 className="text-pretty text-3xl font-bold tracking-tight sm:text-4xl font-mono shimmer">
             Automation that works as hard as you do
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
             Our suite of AI automation services covers every stage of your
             business operations — from data collection to customer engagement.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {services.map((service) => (
-            <Card
-              key={service.title}
-              className="group border-border bg-card transition-all hover:border-foreground/20 hover:shadow-lg"
-            >
-              <CardContent className="p-8">
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-secondary">
-                  <service.icon className="h-6 w-6 text-foreground" />
+        <div className="grid gap-6 md:grid-cols-3" style={{ perspective: 1200 }}>
+          {services.map((service, i) => (
+            <Reveal key={service.title} delay={i * 0.12}>
+              <TiltCard className="h-full rounded-2xl glass p-8 transition-shadow duration-300 hover:shadow-2xl hover:shadow-primary/10">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/30 to-accent-secondary/20 ring-1 ring-primary/30">
+                  <service.icon className="h-6 w-6 text-primary-foreground" />
                 </div>
 
                 <h3 className="mb-3 text-xl font-bold text-foreground font-mono">
@@ -67,13 +65,13 @@ export function Services() {
                       key={feature}
                       className="flex items-center gap-2 text-sm text-muted-foreground"
                     >
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent-secondary shadow-[0_0_8px_2px] shadow-accent-secondary/50" />
                       {feature}
                     </li>
                   ))}
                 </ul>
-              </CardContent>
-            </Card>
+              </TiltCard>
+            </Reveal>
           ))}
         </div>
       </div>

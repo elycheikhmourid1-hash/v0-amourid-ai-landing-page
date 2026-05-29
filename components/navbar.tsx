@@ -4,11 +4,13 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { LeadFormDialog } from "@/components/lead-form-dialog"
+import { LogoMark } from "@/components/logo"
 
 const navLinks = [
   { label: "Services", href: "#services" },
   { label: "How We Work", href: "#how-we-work" },
   { label: "Testimonials", href: "#testimonials" },
+  { label: "Founder", href: "#founder" },
   { label: "Contact", href: "#contact" },
 ]
 
@@ -19,13 +21,11 @@ export function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         {/* Logo Section */}
-        <a href="#" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary shadow-lg shadow-primary/20">
-            <span className="text-xs font-black text-primary-foreground leading-none">AI</span>
-          </div>
+        <a href="#" className="flex items-center gap-2.5">
+          <LogoMark box={40} />
           <div className="flex flex-col leading-none">
             <span className="text-lg font-bold tracking-tighter text-foreground font-mono uppercase">
-              AICore <span className="text-primary text-[0.95em]">Digital</span>
+              AICore <span className="gradient-text-purple text-[0.95em]">Digital</span>
             </span>
           </div>
         </a>
