@@ -340,8 +340,16 @@
   backface-visibility: hidden;
 }
 
+/* Flowing circuit line (animated dash travel) */
+@keyframes dash-flow {
+  to { stroke-dashoffset: -1000; }
+}
+.flow-line {
+  animation: dash-flow 16s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .float-soft, .shimmer, .glow-ring:hover::after {
+  .float-soft, .shimmer, .glow-ring:hover::after, .flow-line {
     animation: none;
   }
 }

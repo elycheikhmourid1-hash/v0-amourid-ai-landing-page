@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { LeadFormDialog } from "@/components/lead-form-dialog"
 import { InteractiveGrid } from "@/components/interactive-grid"
+import { WorkflowAnimation } from "@/components/workflow-animation"
 import { Magnetic } from "@/components/magnetic"
 import { motion } from "motion/react"
 
@@ -67,11 +68,15 @@ export function Hero() {
 
         <motion.p
           variants={item}
-          className="mx-auto max-w-[800px] text-xl md:text-2xl text-muted-foreground font-medium mb-12 text-pretty"
+          className="mx-auto max-w-[800px] text-xl md:text-2xl text-muted-foreground font-medium mb-10 text-pretty"
         >
           Bridging the gap between cutting-edge AI software and physical robotic excellence.
           Your partner in the autonomous revolution.
         </motion.p>
+
+        <motion.div variants={item} className="mx-auto mb-10 w-full max-w-5xl">
+          <WorkflowAnimation />
+        </motion.div>
 
         <motion.div
           variants={item}
