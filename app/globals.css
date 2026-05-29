@@ -97,6 +97,7 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-secondary: var(--accent-secondary);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -215,4 +216,132 @@
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
+}
+
+/* ============================================================
+   PREMIUM ENTERPRISE UI SYSTEM
+   Advanced glassmorphism, glow filters, tactile interactions
+   ============================================================ */
+
+/* Advanced glassmorphism surface */
+.glass {
+  background: color-mix(in oklch, var(--card) 55%, transparent);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid color-mix(in oklch, var(--foreground) 8%, transparent);
+}
+
+.glass-strong {
+  background: color-mix(in oklch, var(--card) 78%, transparent);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid color-mix(in oklch, var(--foreground) 10%, transparent);
+}
+
+/* Spotlight glow that follows the cursor (driven by --mx / --my vars) */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    600px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(168, 85, 247, 0.18),
+    rgba(34, 211, 238, 0.08) 35%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Animated conic glow ring for premium cards/badges */
+@keyframes spin-glow {
+  to { transform: rotate(360deg); }
+}
+.glow-ring {
+  position: relative;
+}
+.glow-ring::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--angle, 0deg), transparent 60%, #a855f7, #22d3ee, transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.glow-ring:hover::after {
+  opacity: 1;
+  animation: spin-glow 4s linear infinite;
+}
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Tactile press feedback — instant, no lag */
+.tactile {
+  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+  will-change: transform;
+}
+.tactile:active {
+  transform: scale(0.97);
+}
+
+/* Soft floating animation for ambient elements */
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.float-soft {
+  animation: float-soft 6s ease-in-out infinite;
+}
+
+/* Shimmer sweep for premium headings/badges */
+@keyframes shimmer-sweep {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--foreground) 30%,
+    #a855f7 45%,
+    #22d3ee 55%,
+    var(--foreground) 70%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-sweep 6s linear infinite;
+}
+
+/* GPU performance hints */
+.gpu {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-soft, .shimmer, .glow-ring:hover::after {
+    animation: none;
+  }
 }
