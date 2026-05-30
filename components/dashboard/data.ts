@@ -166,3 +166,77 @@ export function makeAlert(): CriticalAlert {
 }
 
 export const COST_SPARKLINE = [18, 24, 21, 30, 27, 35, 31, 42, 38, 47, 44, 52]
+
+/* ------------------------------------------------------------------ */
+/* Data & State Manager — Core Data Engine internals                   */
+/* ------------------------------------------------------------------ */
+
+export type SessionState =
+  | "Awaiting_Webhook"
+  | "Processing_Payload"
+  | "Vector_Search"
+  | "Fulfillment_Dispatched"
+
+export type SessionRow = {
+  id: string
+  customer: string
+  state: SessionState
+  checkpointHash: string
+  ttl: number // seconds remaining in Redis
+}
+
+const SESSION_STATES: SessionState[] = [
+  "Awaiting_Webhook",
+  "Processing_Payload",
+  "Vector_Search",
+  "Fulfillment_Dispatched",
+]
+
+const HEX = "0123456789abcdef"
+
+export function makeHash(len = 7) {
+  let s = ""
+  for (let i = 0; i < len; i++) s += HEX[Math.floor(Math.random() * 16)]
+  return s
+}
+
+export const INITIAL_SESSIONS: SessionRow[] = [
+  { id: "#SESS-9011", customer: "cust_AX72•northwind", state: "Awaiting_Webhook", checkpointHash: "db7a3f9", ttl: 184 },
+  { id: "#SESS-9008", customer: "cust_QF19•lumenco", state: "Processing_Payload", checkpointHash: "4c1e88a", ttl: 92 },
+  { id: "#SESS-9004", customer: "cust_KP55•vertexlab", state: "Vector_Search", checkpointHash: "9af20b3", ttl: 311 },
+  { id: "#SESS-8999", customer: "cust_ZM03•harborpay", state: "Fulfillment_Dispatched", checkpointHash: "1f6dcae", ttl: 47 },
+  { id: "#SESS-8994", customer: "cust_BN88•clarionix", state: "Processing_Payload", checkpointHash: "7e3b510", ttl: 228 },
+  { id: "#SESS-8990", customer: "cust_TR41•meridian", state: "Vector_Search", checkpointHash: "a02f9d7", ttl: 159 },
+]
+
+export function nextSessionState(current: SessionState): SessionState {
+  const idx = SESSION_STATES.indexOf(current)
+  return SESSION_STATES[(idx + 1) % SESSION_STATES.length]
+}
+
+export type ContextMechanism = {
+  label: string
+  detail: string
+  tone: "active" | "hit"
+}
+
+export const CONTEXT_MECHANISMS: ContextMechanism[] = [
+  { label: "Semantic Compression (Vector-based)", detail: "Active — 42% Saved", tone: "active" },
+  { label: "Sliding Window Buffer", detail: "Active — Retaining last 5 turns", tone: "active" },
+  { label: "System Prompt Caching", detail: "Hit — 0.002s response time", tone: "hit" },
+]
+
+export const TOKEN_WINDOW = { used: 84000, total: 128000 }
+
+export type SsotNode = {
+  label: string
+  engine: string
+  status: "Synced" | "Live"
+  metric: string
+}
+
+export const SSOT_NODES: SsotNode[] = [
+  { label: "Vector Database", engine: "Pinecone / Milvus", status: "Synced", metric: "1.2M Vectors" },
+  { label: "Relational DB", engine: "PostgreSQL", status: "Synced", metric: "Zero Lag" },
+  { label: "Cache Layer", engine: "Redis Cluster", status: "Live", metric: "99.9% Cache Hit Rate" },
+]
