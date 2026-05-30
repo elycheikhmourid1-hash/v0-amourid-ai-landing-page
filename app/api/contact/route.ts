@@ -100,10 +100,27 @@ export async function POST(request: Request) {
           html,
         })
         if (error) {
-          console.error("[v0] Resend error:", error)
-        } else {
-          emailSent = true
-        }
+  console.error("[v0] Resend error:", error)
+} else {
+  emailSent = true
+
+  // Auto-reply to the client
+  await resend.emails.send({
+    from: "AICore Digital <onboarding@resend.dev>",
+    to: email,
+    subject: "We received your request — AICore Digital",
+    html: `
+      <div style="font-family: ui-sans-serif, system-ui, sans-serif; max-width: 560px; margin: 0 auto;">
+        <h2 style="color: #7c3aed;">Thank you, ${firstName}!</h2>
+        <p style="color: #0f172a;">We've received your request and will contact you within <strong>24 hours</strong>.</p>
+        <p style="color: #0f172a;">In the meantime, feel free to explore our services at <a href="https://www.aicoredigital.com" style="color: #7c3aed;">aicoredigital.com</a></p>
+        <br/>
+        <p style="color: #475569;">— Ely Cheikh Mourid<br/>Founder & CEO, AICore Digital</p>
+      </div>
+    `,
+  })
+}
+
       } catch (mailErr) {
         console.error("[v0] Resend threw:", mailErr)
       }
