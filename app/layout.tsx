@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Inter, Space_Grotesk, Noto_Sans_Arabic } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -11,6 +11,12 @@ const inter = Inter({
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space-grotesk',
+})
+
+// Fallback so Arabic lead/message content (and any RTL data) renders cleanly
+const notoArabic = Noto_Sans_Arabic({
+  subsets: ['arabic'],
+  variable: '--font-noto-arabic',
 })
 
 export const metadata: Metadata = {
@@ -73,7 +79,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${notoArabic.variable}`}>
       <body className="font-sans antialiased">
         {children}
         <Analytics />

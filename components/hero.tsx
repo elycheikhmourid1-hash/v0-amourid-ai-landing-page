@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { LeadFormDialog } from "@/components/lead-form-dialog"
 import { InteractiveGrid } from "@/components/interactive-grid"
+import { WorkflowAnimation } from "@/components/workflow-animation"
 import { Magnetic } from "@/components/magnetic"
 import { motion } from "motion/react"
 
@@ -20,20 +21,11 @@ const item = {
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Video Layer */}
-      <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover opacity-50"
-        >
-          <source src="/agency-background.mp4" type="video/mp4" />
-        </video>
-        {/* Overlay to make text readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
-      </div>
+      {/* Ultra-light CSS grid + glow backdrop (zero video weight) */}
+      <div className="absolute inset-0 z-0 hero-grid" aria-hidden="true" />
+      <div className="absolute inset-0 z-0 hero-glow" aria-hidden="true" />
+      {/* Fade the backdrop into the page */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-transparent via-background/30 to-background" aria-hidden="true" />
 
       {/* Interactive data network layer */}
       <div className="absolute inset-0 z-[1]">
@@ -67,11 +59,15 @@ export function Hero() {
 
         <motion.p
           variants={item}
-          className="mx-auto max-w-[800px] text-xl md:text-2xl text-muted-foreground font-medium mb-12 text-pretty"
+          className="mx-auto max-w-[800px] text-xl md:text-2xl text-muted-foreground font-medium mb-10 text-pretty"
         >
           Bridging the gap between cutting-edge AI software and physical robotic excellence.
           Your partner in the autonomous revolution.
         </motion.p>
+
+        <motion.div variants={item} className="mx-auto mb-10 w-full max-w-5xl">
+          <WorkflowAnimation />
+        </motion.div>
 
         <motion.div
           variants={item}
