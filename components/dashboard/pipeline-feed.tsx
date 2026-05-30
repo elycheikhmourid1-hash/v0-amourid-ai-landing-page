@@ -72,8 +72,8 @@ export function PipelineFeed({
                     </span>
                   </div>
                   <p className="mt-1 font-mono text-[11px] text-slate-500">
-                    routed in {row.latencyMs}s · parser confidence{" "}
-                    {valid ? "0.9" + Math.floor(Math.random() * 9) : "0.4" + Math.floor(Math.random() * 9)}
+                    routed in {row.latencyMs}ms · parser confidence{" "}
+                    {valid ? "0.97" : "0.42"}
                   </p>
                 </div>
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { Cpu, Clock, ArrowLeft, Activity, Database, ShieldCheck, TrendingUp, X } from "lucide-react"
 import { MetricsBar } from "@/components/dashboard/metrics-bar"
@@ -189,7 +189,7 @@ export default function DashboardPage() {
     })
   }, [pipeline, path, retriesOnly, retries, severity])
 
-  function handleForceBypass(id: string) {
+  const handleForceBypass = useCallback((id: string) => {
     setPipeline((prev) =>
       prev.map((r) =>
         r.id === id ? { ...r, validation: "Valid", validationDetail: "Force Bypassed" } : r,
@@ -199,15 +199,15 @@ export default function DashboardPage() {
       { id, reason: "Operator force bypass", routedTo: "Backup Server B", frozen: false },
       ...prev.filter((f) => f.id !== id),
     ].slice(0, 5))
-  }
+  }, [])
 
-  function handleReroute(id: string) {
+  const handleReroute = useCallback((id: string) => {
     setFallbacks((prev) =>
       prev.map((f) => (f.id === id ? { ...f, routedTo: "Backup Server C", reason: "Re-routed by operator" } : f)),
     )
-  }
+  }, [])
 
-  function handleRollback(id: string) {
+  const handleRollback = useCallback((id: string) => {
     setSessions((prev) =>
       prev.map((s) =>
         s.id === id
@@ -215,14 +215,14 @@ export default function DashboardPage() {
           : s,
       ),
     )
-  }
+  }, [])
 
   const inspectedSession = useMemo(
     () => sessions.find((s) => s.id === inspectId) ?? null,
     [sessions, inspectId],
   )
 
-  function handleApproveOverride(id: string) {
+  const handleApproveOverride = useCallback((id: string) => {
     setIntercepts((prev) => prev.filter((i) => i.id !== id))
     // Add an approved evaluation entry for it
     setEvaluations((prev) => [
@@ -238,13 +238,13 @@ export default function DashboardPage() {
       },
       ...prev,
     ].slice(0, 12))
-  }
+  }, [])
 
-  function handleSendBack(id: string) {
+  const handleSendBack = useCallback((id: string) => {
     setIntercepts((prev) => prev.filter((i) => i.id !== id))
-  }
+  }, [])
 
-  function handleRevokeCredentials() {
+  const handleRevokeCredentials = useCallback(() => {
     setProvisioning((prev) => ({
       ...prev,
       accessKey: "ak_live_REVOKED",
@@ -252,25 +252,28 @@ export default function DashboardPage() {
       webhookStatus: "Pending",
       webhookCode: null,
     }))
-  }
+  }, [])
 
-  function handleAccelerateClient(id: string) {
+  const handleAccelerateClient = useCallback((id: string) => {
     setClients((prev) =>
       prev.map((c) =>
         c.id === id ? { ...c, phase: nextOnboardingPhase(c.phase) } : c,
       ),
     )
     // If accelerating the provisioned client, regenerate creds
-    if (id === provisioning.clientId) {
-      setProvisioning((prev) => ({
-        ...prev,
-        accessKey: `ak_live_${makeHash(8)}...${makeHash(4)}`,
-        workspaceStatus: "Provisioned",
-        webhookStatus: "Verified",
-        webhookCode: 200,
-      }))
-    }
-  }
+    setProvisioning((prev) => {
+      if (id === prev.clientId) {
+        return {
+          ...prev,
+          accessKey: `ak_live_${makeHash(8)}...${makeHash(4)}`,
+          workspaceStatus: "Provisioned",
+          webhookStatus: "Verified",
+          webhookCode: 200,
+        }
+      }
+      return prev
+    })
+  }, [])
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200">
