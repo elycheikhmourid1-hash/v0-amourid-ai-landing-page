@@ -1,8 +1,9 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Activity } from "lucide-react"
 import { LeadFormDialog } from "@/components/lead-form-dialog"
 import { LogoMark } from "@/components/logo"
 
@@ -43,8 +44,20 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* CTA Button */}
-        <div className="hidden md:block">
+        {/* CTA Button + Secure Ops Entry */}
+        <div className="hidden md:flex md:items-center md:gap-3">
+          <Link
+            href="/dashboard"
+            aria-label="Operations dashboard (secure)"
+            title="Operations Console"
+            className="group relative flex h-9 w-9 items-center justify-center rounded-full border border-primary/30 bg-primary/5 text-primary transition-all hover:border-primary/60 hover:bg-primary/10 hover:scale-105"
+          >
+            <Activity className="h-4 w-4 transition-transform group-hover:scale-110" />
+            <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+            </span>
+          </Link>
           <LeadFormDialog>
             <Button size="default" className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-6 font-semibold transition-transform hover:scale-105">
               Free Consultation
@@ -76,7 +89,15 @@ export function Navbar() {
                 {link.label}
               </a>
             ))}
-            <div className="pt-4 border-t border-border">
+            <div className="pt-4 border-t border-border flex flex-col gap-4">
+              <Link
+                href="/dashboard"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary/80"
+              >
+                <Activity className="h-4 w-4" />
+                Operations Console
+              </Link>
               <LeadFormDialog>
                 <Button size="lg" className="w-full rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg">
                   Free Consultation
