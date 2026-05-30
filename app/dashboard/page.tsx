@@ -2,21 +2,26 @@
 
 import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
-import { Cpu, Clock, ArrowLeft, Activity, Database, X } from "lucide-react"
+import { Cpu, Clock, ArrowLeft, Activity, Database, ShieldCheck, X } from "lucide-react"
 import { MetricsBar } from "@/components/dashboard/metrics-bar"
 import { PipelineFeed } from "@/components/dashboard/pipeline-feed"
 import { ResilienceMatrix } from "@/components/dashboard/resilience-matrix"
 import { DashboardFilters } from "@/components/dashboard/dashboard-filters"
 import { DataStateManager } from "@/components/dashboard/data-state-manager"
+import { QaGovernance } from "@/components/dashboard/qa-governance"
 import {
   INITIAL_PIPELINE,
   INITIAL_RETRIES,
   INITIAL_FALLBACKS,
   INITIAL_ALERTS,
   INITIAL_SESSIONS,
+  INITIAL_EVALUATIONS,
+  INITIAL_DRIFT_METRICS,
+  INITIAL_HITL_INTERCEPTS,
   makePipelineRow,
   makeAlert,
   makeHash,
+  makeEvaluation,
   nextSessionState,
   nowStamp,
   type PipelineRow,
@@ -24,11 +29,14 @@ import {
   type FallbackRow,
   type CriticalAlert,
   type SessionRow,
+  type EvaluationRow,
+  type DriftMetrics,
+  type HitlIntercept,
   type SystemPath,
   type Severity,
 } from "@/components/dashboard/data"
 
-type DashboardTab = "pipeline" | "data-state"
+type DashboardTab = "pipeline" | "data-state" | "qa-governance"
 
 export default function DashboardPage() {
   const [pipeline, setPipeline] = useState<PipelineRow[]>(INITIAL_PIPELINE)
@@ -36,6 +44,9 @@ export default function DashboardPage() {
   const [fallbacks, setFallbacks] = useState<FallbackRow[]>(INITIAL_FALLBACKS)
   const [alerts, setAlerts] = useState<CriticalAlert[]>(INITIAL_ALERTS)
   const [sessions, setSessions] = useState<SessionRow[]>(INITIAL_SESSIONS)
+  const [evaluations, setEvaluations] = useState<EvaluationRow[]>(INITIAL_EVALUATIONS)
+  const [drift, setDrift] = useState<DriftMetrics>(INITIAL_DRIFT_METRICS)
+  const [intercepts, setIntercepts] = useState<HitlIntercept[]>(INITIAL_HITL_INTERCEPTS)
   const [inspectId, setInspectId] = useState<string | null>(null)
 
   const [tab, setTab] = useState<DashboardTab>("pipeline")
@@ -104,6 +115,28 @@ export default function DashboardPage() {
     return () => clearInterval(t)
   }, [live])
 
+  // Evaluation stream — new LLM judge results
+  useEffect(() => {
+    if (!live) return
+    const t = setInterval(() => {
+      setEvaluations((prev) => [makeEvaluation(), ...prev].slice(0, 12))
+    }, 3400)
+    return () => clearInterval(t)
+  }, [live])
+
+  // Drift metrics micro-fluctuation
+  useEffect(() => {
+    if (!live) return
+    const t = setInterval(() => {
+      setDrift((prev) => ({
+        ...prev,
+        promptDrift: Math.max(0.1, +(prev.promptDrift + (Math.random() - 0.52) * 0.1).toFixed(1)),
+        hallucinationRate: Math.max(0.01, +(prev.hallucinationRate + (Math.random() - 0.55) * 0.01).toFixed(2)),
+      }))
+    }, 5000)
+    return () => clearInterval(t)
+  }, [live])
+
   const filteredPipeline = useMemo(() => {
     return pipeline.filter((row) => {
       if (path !== "All" && row.intent !== path) return false
@@ -147,6 +180,28 @@ export default function DashboardPage() {
     () => sessions.find((s) => s.id === inspectId) ?? null,
     [sessions, inspectId],
   )
+
+  function handleApproveOverride(id: string) {
+    setIntercepts((prev) => prev.filter((i) => i.id !== id))
+    // Add an approved evaluation entry for it
+    setEvaluations((prev) => [
+      {
+        id,
+        linkedReqId: `#REQ-${8400 + Math.floor(Math.random() * 100)}`,
+        evaluator: "HITL_Override",
+        accuracy: 100,
+        latencyMs: 0,
+        safetyPass: true,
+        decision: "APPROVED",
+        timestamp: nowStamp(),
+      },
+      ...prev,
+    ].slice(0, 12))
+  }
+
+  function handleSendBack(id: string) {
+    setIntercepts((prev) => prev.filter((i) => i.id !== id))
+  }
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200">
@@ -194,6 +249,7 @@ export default function DashboardPage() {
             [
               { key: "pipeline", label: "Pipeline Flow", Icon: Activity },
               { key: "data-state", label: "Data & State Manager", Icon: Database },
+              { key: "qa-governance", label: "Automated QA & Governance", Icon: ShieldCheck },
             ] as const
           ).map(({ key, label, Icon }) => {
             const active = tab === key
@@ -243,11 +299,19 @@ export default function DashboardPage() {
               </div>
             </div>
           </>
-        ) : (
+        ) : tab === "data-state" ? (
           <DataStateManager
             sessions={sessions}
             onRollback={handleRollback}
             onInspect={setInspectId}
+          />
+        ) : (
+          <QaGovernance
+            evaluations={evaluations}
+            drift={drift}
+            intercepts={intercepts}
+            onApproveOverride={handleApproveOverride}
+            onSendBack={handleSendBack}
           />
         )}
       </main>

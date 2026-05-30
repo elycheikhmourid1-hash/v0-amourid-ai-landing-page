@@ -240,3 +240,86 @@ export const SSOT_NODES: SsotNode[] = [
   { label: "Relational DB", engine: "PostgreSQL", status: "Synced", metric: "Zero Lag" },
   { label: "Cache Layer", engine: "Redis Cluster", status: "Live", metric: "99.9% Cache Hit Rate" },
 ]
+
+/* ------------------------------------------------------------------ */
+/* Automated QA & Governance — LLM-as-a-Judge & HITL                   */
+/* ------------------------------------------------------------------ */
+
+export type AuditDecision = "APPROVED" | "REJECTED"
+
+export type EvaluationRow = {
+  id: string
+  linkedReqId: string
+  evaluator: string
+  accuracy: number
+  latencyMs: number
+  safetyPass: boolean
+  decision: AuditDecision
+  timestamp: string
+}
+
+const EVALUATORS = [
+  "Format_Guard_v2",
+  "Hallucination_Detector",
+  "Security_Anonymizer",
+  "Schema_Validator",
+  "Tone_Compliance",
+  "PII_Redactor",
+]
+
+let outCounter = 5505
+
+export function nextOutId() {
+  outCounter += 1
+  return `#OUT-${outCounter}`
+}
+
+export function makeEvaluation(): EvaluationRow {
+  const approved = Math.random() > 0.18
+  return {
+    id: nextOutId(),
+    linkedReqId: `#REQ-${8400 + Math.floor(Math.random() * 100)}`,
+    evaluator: EVALUATORS[Math.floor(Math.random() * EVALUATORS.length)],
+    accuracy: Math.floor(88 + Math.random() * 12),
+    latencyMs: Math.floor(80 + Math.random() * 140),
+    safetyPass: Math.random() > 0.08,
+    decision: approved ? "APPROVED" : "REJECTED",
+    timestamp: nowStamp(),
+  }
+}
+
+export const INITIAL_EVALUATIONS: EvaluationRow[] = [
+  { id: "#OUT-5505", linkedReqId: "#REQ-8491", evaluator: "Format_Guard_v2", accuracy: 98, latencyMs: 112, safetyPass: true, decision: "APPROVED", timestamp: "14:03:22" },
+  { id: "#OUT-5504", linkedReqId: "#REQ-8490", evaluator: "Hallucination_Detector", accuracy: 94, latencyMs: 145, safetyPass: true, decision: "APPROVED", timestamp: "14:03:18" },
+  { id: "#OUT-5503", linkedReqId: "#REQ-8488", evaluator: "Security_Anonymizer", accuracy: 91, latencyMs: 98, safetyPass: false, decision: "REJECTED", timestamp: "14:03:11" },
+  { id: "#OUT-5502", linkedReqId: "#REQ-8485", evaluator: "Schema_Validator", accuracy: 97, latencyMs: 130, safetyPass: true, decision: "APPROVED", timestamp: "14:03:05" },
+  { id: "#OUT-5501", linkedReqId: "#REQ-8479", evaluator: "Tone_Compliance", accuracy: 89, latencyMs: 167, safetyPass: true, decision: "REJECTED", timestamp: "14:02:58" },
+]
+
+export type DriftMetrics = {
+  promptDrift: number
+  hallucinationRate: number
+  costPerformanceRatio: number
+  driftTrend: "up" | "down" | "stable"
+  hallucinationTrend: "up" | "down" | "stable"
+}
+
+export const INITIAL_DRIFT_METRICS: DriftMetrics = {
+  promptDrift: 1.2,
+  hallucinationRate: 0.04,
+  costPerformanceRatio: 4.8,
+  driftTrend: "stable",
+  hallucinationTrend: "down",
+}
+
+export type HitlIntercept = {
+  id: string
+  violation: string
+  outputSnippet: string
+}
+
+export const INITIAL_HITL_INTERCEPTS: HitlIntercept[] = [
+  { id: "#OUT-5498", violation: "Schema mismatch on output array", outputSnippet: '{ "items": null, "count": -1 }' },
+  { id: "#OUT-5492", violation: "PII detected in response body", outputSnippet: '"email": "john.doe@client.com"' },
+  { id: "#OUT-5487", violation: "Hallucinated external URL reference", outputSnippet: '"source": "https://fake-domain.io/doc"' },
+]
