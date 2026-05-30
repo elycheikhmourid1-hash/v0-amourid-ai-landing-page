@@ -141,6 +141,26 @@ export default function OperationsDashboard() {
             {activeTab === "clients" && <ClientOnboardingTab />}
           </motion.div>
         </AnimatePresence>
+
+        {/* Dashboard Footer */}
+        <footer className="mt-12 border-t border-slate-800/40 pt-6">
+          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <LogoMark box={20} />
+              <span className="font-mono uppercase">AICORE DIGITAL</span>
+              <span className="text-slate-600">|</span>
+              <span>Operations Control Center</span>
+            </div>
+            <div className="flex flex-col items-center gap-1 sm:items-end">
+              <p className="text-xs text-muted-foreground">
+                {"© 2026 AICORE DIGITAL. All rights reserved."}
+              </p>
+              <p className="text-[10px] text-muted-foreground/60">
+                Ely Cheikh Mourid, Founder & CEO
+              </p>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   )

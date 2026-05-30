@@ -20,31 +20,36 @@ const notoArabic = Noto_Sans_Arabic({
 })
 
 export const metadata: Metadata = {
-  title: 'AICore Digital - AI Automation for Smarter Business | Richmond, VA',
+  title: 'AICORE DIGITAL - AI Automation for Smarter Business | Richmond, VA',
   description:
-    'AICore Digital is a Richmond, Virginia-based AI automation startup specializing in Google Forms automation, data analytics, and smart automated responses for businesses. Request a free consultation today.',
+    'AICORE DIGITAL is a Richmond, Virginia-based AI automation agency founded by Ely Cheikh Mourid. We specialize in workflow automation, data analytics, and intelligent AI solutions for businesses. Request a free consultation today.',
   keywords: [
     'AI automation Richmond',
-    'Google Forms automation',
+    'workflow automation',
     'data analytics',
     'smart automated responses',
     'business automation Virginia',
-    'AICore Digital',
+    'AICORE DIGITAL',
     'AI consulting Richmond VA',
+    'Ely Cheikh Mourid',
   ],
+  authors: [{ name: 'Ely Cheikh Mourid', url: 'https://aicoredigital.com' }],
+  creator: 'Ely Cheikh Mourid',
+  publisher: 'AICORE DIGITAL',
   openGraph: {
-    title: 'AICore Digital - AI Automation for Smarter Business',
+    title: 'AICORE DIGITAL - AI Automation for Smarter Business',
     description:
-      'Automate workflows, unlock data insights, and deliver intelligent responses with AICore Digital. Based in Richmond, Virginia.',
+      'Automate workflows, unlock data insights, and deliver intelligent AI solutions with AICORE DIGITAL. Founded by Ely Cheikh Mourid. Based in Richmond, Virginia.',
     type: 'website',
     locale: 'en_US',
-    siteName: 'AICore Digital',
+    siteName: 'AICORE DIGITAL',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AICore Digital - AI Automation for Smarter Business',
+    title: 'AICORE DIGITAL - AI Automation for Smarter Business',
     description:
-      'Automate workflows, unlock data insights, and deliver intelligent responses with AICore Digital. Based in Richmond, Virginia.',
+      'Automate workflows, unlock data insights, and deliver intelligent AI solutions with AICORE DIGITAL. Founded by Ely Cheikh Mourid.',
+    creator: '@aicoredigital',
   },
   robots: {
     index: true,
