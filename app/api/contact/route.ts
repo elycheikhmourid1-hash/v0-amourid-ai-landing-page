@@ -106,7 +106,7 @@ export async function POST(request: Request) {
 
   // Auto-reply to the client
   await resend.emails.send({
-    from: "AICore Digital <onboarding@resend.dev>",
+    from: "AICore Digital <noreply@aicoredigital.com>",
     to: email,
     subject: "We received your request — AICore Digital",
     html: `
