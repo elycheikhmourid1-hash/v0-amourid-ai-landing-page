@@ -85,6 +85,8 @@
   --font-mono: var(--font-space-grotesk), 'Space Grotesk', monospace;
   /* For user-generated content that may be Arabic/RTL (lead names, messages) */
   --font-i18n: var(--font-noto-arabic), var(--font-inter), 'Inter', system-ui, sans-serif;
+  /* Premium Arabic font for localized UI */
+  --font-arabic: var(--font-tajawal), 'Tajawal', var(--font-noto-arabic), system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -131,6 +133,52 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* ============================================================
+   RTL / LTR DIRECTION HANDLING
+   Seamless bi-directional support for Arabic localization
+   ============================================================ */
+
+/* Arabic font class */
+.font-arabic {
+  font-family: var(--font-arabic);
+}
+
+/* RTL-specific overrides when dir="rtl" is set on <html> */
+html[dir="rtl"] body {
+  font-family: var(--font-arabic);
+}
+
+/* Flip flex directions for RTL */
+html[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Ensure text alignment follows direction */
+html[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+html[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+/* Space utilities auto-flip using logical properties */
+html[dir="rtl"] .ml-auto {
+  margin-left: unset;
+  margin-right: auto;
+}
+
+html[dir="rtl"] .mr-auto {
+  margin-right: unset;
+  margin-left: auto;
+}
+
+/* RTL-aware gap utilities - grid/flex gaps work naturally */
+/* Icons and decorative elements that should NOT flip */
+html[dir="rtl"] .no-flip {
+  transform: scaleX(1) !important;
 }
 
 /* Gradient text utilities */
