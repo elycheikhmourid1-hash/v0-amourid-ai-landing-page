@@ -22,8 +22,9 @@ const en = {
   "hero.badge": "Next-Gen Robotics & AI Automation",
   "hero.title1": "AICore",
   "hero.title2": "Digital",
-  "hero.subtitle": "Bridging the gap between cutting-edge AI software and physical robotic excellence. Your partner in the autonomous revolution.",
-  "hero.cta.primary": "Transform Your Business",
+  "hero.mainHeading": "See an autonomous AI agent think and act",
+  "hero.subtitle": "Trigger a live demo and watch the agent reason, call tools, query data, and complete a real automation — exactly how our production agents operate.",
+  "hero.cta.primary": "Free Consultation",
   "hero.cta.secondary": "Explore Solutions",
   
   // CTA
@@ -192,11 +193,12 @@ const ar: Record<TranslationKey, string> = {
   "nav.dashboard": "لوحة التحكم العملياتية",
   
   // Hero
-  "hero.badge": "الجيل القادم من الروبوتات وأتمتة الذكاء الاصطناعي",
+  "hero.badge": "الجيل القادم من أتمتة الذكاء الاصطناعي والروبوتات",
   "hero.title1": "إيه آي كور",
   "hero.title2": "ديجيتال",
-  "hero.subtitle": "نسد الفجوة بين برامج الذكاء الاصطناعي المتطورة والتميز الروبوتي الفعلي. شريكك في الثورة المستقلة.",
-  "hero.cta.primary": "حوّل أعمالك",
+  "hero.mainHeading": "شاهد عميل الذكاء الاصطناعي المستقل يفكر ويتصرف لحظياً",
+  "hero.subtitle": "قم بتشغيل العرض التجريبي الحي وشاهد العميل يحلل، ويستدعي الأدوات، ويستعلم عن البيانات، وينفذ أتمتة حقيقية — تماماً كما تعمل عملاؤنا في الإنتاج الحقيقي.",
+  "hero.cta.primary": "استشارة مجانية",
   "hero.cta.secondary": "استكشف الحلول",
   
   // CTA
@@ -263,7 +265,7 @@ const ar: Record<TranslationKey, string> = {
   "dashboard.title": "لوحة التحكم العملياتية",
   "dashboard.subtitle": "مركز تحكم إيه آي كور ديجيتال",
   "dashboard.backToSite": "العودة للموقع",
-  "dashboard.status": "جميع الأنظمة تعمل",
+  "dashboard.status": "جميع ال��نظمة تعمل",
   "dashboard.opsCenter": "مركز التحكم العملياتي",
   
   // Dashboard Tabs
@@ -365,11 +367,12 @@ const fr: Record<TranslationKey, string> = {
   "nav.dashboard": "Tableau de Bord Opérationnel",
   
   // Hero
-  "hero.badge": "Robotique et Automatisation IA de Nouvelle Génération",
+  "hero.badge": "Robotique de nouvelle génération & automatisation IA",
   "hero.title1": "AICore",
   "hero.title2": "Digital",
-  "hero.subtitle": "Comblant le fossé entre les logiciels IA de pointe et l'excellence robotique physique. Votre partenaire dans la révolution autonome.",
-  "hero.cta.primary": "Transformez Votre Entreprise",
+  "hero.mainHeading": "Découvrez un agent IA autonome penser et agir",
+  "hero.subtitle": "Déclenchez une démo en direct et regardez l'agent raisonner, appeler des outils, interroger des données et finaliser une automatisation réelle — exactement comme fonctionnent nos agents de production.",
+  "hero.cta.primary": "Consultation Gratuite",
   "hero.cta.secondary": "Explorer les Solutions",
   
   // CTA

@@ -6,6 +6,7 @@ import { InteractiveGrid } from "@/components/interactive-grid"
 import { WorkflowAnimation } from "@/components/workflow-animation"
 import { Magnetic } from "@/components/magnetic"
 import { motion } from "motion/react"
+import { useTranslation } from "@/lib/i18n"
 
 const container = {
   hidden: {},
@@ -19,6 +20,8 @@ const item = {
 }
 
 export function Hero() {
+  const { t } = useTranslation()
+  
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Ultra-light CSS grid + glow backdrop (zero video weight) */}
@@ -46,23 +49,29 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-secondary opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-secondary" />
           </span>
-          Next-Gen Robotics &amp; AI Automation
+          {t("hero.badge")}
         </motion.div>
 
         <motion.h1
           variants={item}
           className="text-5xl md:text-8xl font-black tracking-tighter mb-6 uppercase"
         >
-          <span className="shimmer">AICore</span>{" "}
-          <span className="text-primary drop-shadow-[0_0_25px_rgba(168,85,247,0.5)]">Digital</span>
+          <span className="shimmer">{t("hero.title1")}</span>{" "}
+          <span className="text-primary drop-shadow-[0_0_25px_rgba(168,85,247,0.5)]">{t("hero.title2")}</span>
         </motion.h1>
+
+        <motion.h2
+          variants={item}
+          className="mx-auto max-w-[900px] text-2xl md:text-4xl text-foreground font-bold mb-6 text-pretty"
+        >
+          {t("hero.mainHeading")}
+        </motion.h2>
 
         <motion.p
           variants={item}
-          className="mx-auto max-w-[800px] text-xl md:text-2xl text-muted-foreground font-medium mb-10 text-pretty"
+          className="mx-auto max-w-[800px] text-lg md:text-xl text-muted-foreground font-medium mb-10 text-pretty"
         >
-          Bridging the gap between cutting-edge AI software and physical robotic excellence.
-          Your partner in the autonomous revolution.
+          {t("hero.subtitle")}
         </motion.p>
 
         <motion.div variants={item} className="mx-auto mb-10 w-full max-w-5xl">
@@ -79,7 +88,7 @@ export function Hero() {
                 size="lg"
                 className="tactile h-16 px-10 rounded-full text-xl font-bold text-white bg-gradient-to-r from-fuchsia-600 via-purple-600 to-cyan-500 hover:from-fuchsia-500 hover:via-purple-500 hover:to-cyan-400 shadow-2xl shadow-purple-600/40 border-0"
               >
-                Transform Your Business
+                {t("hero.cta.primary")}
               </Button>
             </LeadFormDialog>
           </Magnetic>
@@ -90,7 +99,7 @@ export function Hero() {
               className="tactile h-16 px-10 rounded-full text-lg font-semibold text-white border-2 border-cyan-400/50 hover:border-cyan-400 hover:bg-cyan-400/10 backdrop-blur-sm bg-transparent"
               onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
             >
-              Explore Solutions
+              {t("hero.cta.secondary")}
             </Button>
           </Magnetic>
         </motion.div>
