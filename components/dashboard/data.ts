@@ -323,3 +323,117 @@ export const INITIAL_HITL_INTERCEPTS: HitlIntercept[] = [
   { id: "#OUT-5492", violation: "PII detected in response body", outputSnippet: '"email": "john.doe@client.com"' },
   { id: "#OUT-5487", violation: "Hallucinated external URL reference", outputSnippet: '"source": "https://fake-domain.io/doc"' },
 ]
+
+/* ------------------------------------------------------------------ */
+/* Client Onboarding & Growth — Acquisition Engine                     */
+/* ------------------------------------------------------------------ */
+
+export type OnboardingPhase =
+  | "Data_Discovery"
+  | "API_Scoping"
+  | "Architecture_Review"
+  | "Ready_To_Deploy"
+
+export type ClientRow = {
+  id: string
+  companyName: string
+  useCase: string
+  estimatedArr: number
+  techStackMatch: number
+  phase: OnboardingPhase
+  timestamp: string
+}
+
+const COMPANY_NAMES = [
+  "Apex_Logistics",
+  "BioTech_Solutions",
+  "Meridian_Finance",
+  "NovaTech_AI",
+  "Quantum_Retail",
+  "Stratos_Health",
+  "Vertex_Media",
+  "Zenith_Manufacturing",
+]
+
+const USE_CASES = [
+  "Internal Database Automation",
+  "Customer Support Agent",
+  "Sales Pipeline Orchestration",
+  "Document Processing AI",
+  "Predictive Analytics Engine",
+  "Compliance Monitoring Bot",
+]
+
+const ONBOARDING_PHASES: OnboardingPhase[] = [
+  "Data_Discovery",
+  "API_Scoping",
+  "Architecture_Review",
+  "Ready_To_Deploy",
+]
+
+let clientCounter = 1042
+
+export function nextClientId() {
+  clientCounter += 1
+  return `#CLI-${clientCounter}`
+}
+
+export function makeClientRow(): ClientRow {
+  return {
+    id: nextClientId(),
+    companyName: COMPANY_NAMES[Math.floor(Math.random() * COMPANY_NAMES.length)],
+    useCase: USE_CASES[Math.floor(Math.random() * USE_CASES.length)],
+    estimatedArr: Math.floor(24000 + Math.random() * 176000),
+    techStackMatch: Math.floor(78 + Math.random() * 22),
+    phase: ONBOARDING_PHASES[Math.floor(Math.random() * ONBOARDING_PHASES.length)],
+    timestamp: nowStamp(),
+  }
+}
+
+export function nextOnboardingPhase(current: OnboardingPhase): OnboardingPhase {
+  const idx = ONBOARDING_PHASES.indexOf(current)
+  return ONBOARDING_PHASES[Math.min(idx + 1, ONBOARDING_PHASES.length - 1)]
+}
+
+export const INITIAL_CLIENTS: ClientRow[] = [
+  { id: "#CLI-1042", companyName: "Apex_Logistics", useCase: "Internal Database Automation", estimatedArr: 84000, techStackMatch: 94, phase: "Architecture_Review", timestamp: "14:01:22" },
+  { id: "#CLI-1041", companyName: "BioTech_Solutions", useCase: "Customer Support Agent", estimatedArr: 156000, techStackMatch: 89, phase: "API_Scoping", timestamp: "14:00:55" },
+  { id: "#CLI-1040", companyName: "Meridian_Finance", useCase: "Compliance Monitoring Bot", estimatedArr: 210000, techStackMatch: 97, phase: "Ready_To_Deploy", timestamp: "13:59:41" },
+  { id: "#CLI-1039", companyName: "NovaTech_AI", useCase: "Document Processing AI", estimatedArr: 48000, techStackMatch: 82, phase: "Data_Discovery", timestamp: "13:58:12" },
+  { id: "#CLI-1038", companyName: "Stratos_Health", useCase: "Predictive Analytics Engine", estimatedArr: 132000, techStackMatch: 91, phase: "API_Scoping", timestamp: "13:57:30" },
+]
+
+export type ResourceMetrics = {
+  projectedTokens: number // millions
+  concurrencyLimit: number
+  concurrencyCurrent: number
+  workersAllocated: number
+  workersTotal: number
+}
+
+export const INITIAL_RESOURCE_METRICS: ResourceMetrics = {
+  projectedTokens: 42.5,
+  concurrencyLimit: 500,
+  concurrencyCurrent: 347,
+  workersAllocated: 14,
+  workersTotal: 20,
+}
+
+export type ProvisioningStatus = "Pending" | "Provisioned" | "Failed"
+export type WebhookStatus = "Pending" | "Verified" | "Failed"
+
+export type ProvisioningState = {
+  workspaceStatus: ProvisioningStatus
+  webhookStatus: WebhookStatus
+  webhookCode: number | null
+  accessKey: string
+  clientId: string
+}
+
+export const INITIAL_PROVISIONING: ProvisioningState = {
+  workspaceStatus: "Provisioned",
+  webhookStatus: "Verified",
+  webhookCode: 200,
+  accessKey: "ak_live_7x9fK2mN8pQr...vWz3Y",
+  clientId: "#CLI-1040",
+}

@@ -2,13 +2,14 @@
 
 import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
-import { Cpu, Clock, ArrowLeft, Activity, Database, ShieldCheck, X } from "lucide-react"
+import { Cpu, Clock, ArrowLeft, Activity, Database, ShieldCheck, TrendingUp, X } from "lucide-react"
 import { MetricsBar } from "@/components/dashboard/metrics-bar"
 import { PipelineFeed } from "@/components/dashboard/pipeline-feed"
 import { ResilienceMatrix } from "@/components/dashboard/resilience-matrix"
 import { DashboardFilters } from "@/components/dashboard/dashboard-filters"
 import { DataStateManager } from "@/components/dashboard/data-state-manager"
 import { QaGovernance } from "@/components/dashboard/qa-governance"
+import { ClientOnboarding } from "@/components/dashboard/client-onboarding"
 import {
   INITIAL_PIPELINE,
   INITIAL_RETRIES,
@@ -18,11 +19,16 @@ import {
   INITIAL_EVALUATIONS,
   INITIAL_DRIFT_METRICS,
   INITIAL_HITL_INTERCEPTS,
+  INITIAL_CLIENTS,
+  INITIAL_RESOURCE_METRICS,
+  INITIAL_PROVISIONING,
   makePipelineRow,
   makeAlert,
   makeHash,
   makeEvaluation,
+  makeClientRow,
   nextSessionState,
+  nextOnboardingPhase,
   nowStamp,
   type PipelineRow,
   type RetryRow,
@@ -32,11 +38,14 @@ import {
   type EvaluationRow,
   type DriftMetrics,
   type HitlIntercept,
+  type ClientRow,
+  type ResourceMetrics,
+  type ProvisioningState,
   type SystemPath,
   type Severity,
 } from "@/components/dashboard/data"
 
-type DashboardTab = "pipeline" | "data-state" | "qa-governance"
+type DashboardTab = "pipeline" | "data-state" | "qa-governance" | "client-onboarding"
 
 export default function DashboardPage() {
   const [pipeline, setPipeline] = useState<PipelineRow[]>(INITIAL_PIPELINE)
@@ -47,6 +56,9 @@ export default function DashboardPage() {
   const [evaluations, setEvaluations] = useState<EvaluationRow[]>(INITIAL_EVALUATIONS)
   const [drift, setDrift] = useState<DriftMetrics>(INITIAL_DRIFT_METRICS)
   const [intercepts, setIntercepts] = useState<HitlIntercept[]>(INITIAL_HITL_INTERCEPTS)
+  const [clients, setClients] = useState<ClientRow[]>(INITIAL_CLIENTS)
+  const [resources, setResources] = useState<ResourceMetrics>(INITIAL_RESOURCE_METRICS)
+  const [provisioning, setProvisioning] = useState<ProvisioningState>(INITIAL_PROVISIONING)
   const [inspectId, setInspectId] = useState<string | null>(null)
 
   const [tab, setTab] = useState<DashboardTab>("pipeline")
@@ -137,6 +149,35 @@ export default function DashboardPage() {
     return () => clearInterval(t)
   }, [live])
 
+  // Client onboarding stream — new inbound clients
+  useEffect(() => {
+    if (!live) return
+    const t = setInterval(() => {
+      setClients((prev) => [makeClientRow(), ...prev].slice(0, 8))
+    }, 5200)
+    return () => clearInterval(t)
+  }, [live])
+
+  // Resource metrics fluctuation
+  useEffect(() => {
+    if (!live) return
+    const t = setInterval(() => {
+      setResources((prev) => ({
+        ...prev,
+        projectedTokens: Math.max(20, +(prev.projectedTokens + (Math.random() - 0.48) * 2).toFixed(1)),
+        concurrencyCurrent: Math.min(
+          prev.concurrencyLimit,
+          Math.max(100, prev.concurrencyCurrent + Math.floor((Math.random() - 0.45) * 30)),
+        ),
+        workersAllocated: Math.min(
+          prev.workersTotal,
+          Math.max(8, prev.workersAllocated + (Math.random() > 0.7 ? 1 : Math.random() < 0.3 ? -1 : 0)),
+        ),
+      }))
+    }, 3000)
+    return () => clearInterval(t)
+  }, [live])
+
   const filteredPipeline = useMemo(() => {
     return pipeline.filter((row) => {
       if (path !== "All" && row.intent !== path) return false
@@ -203,6 +244,34 @@ export default function DashboardPage() {
     setIntercepts((prev) => prev.filter((i) => i.id !== id))
   }
 
+  function handleRevokeCredentials() {
+    setProvisioning((prev) => ({
+      ...prev,
+      accessKey: "ak_live_REVOKED",
+      workspaceStatus: "Pending",
+      webhookStatus: "Pending",
+      webhookCode: null,
+    }))
+  }
+
+  function handleAccelerateClient(id: string) {
+    setClients((prev) =>
+      prev.map((c) =>
+        c.id === id ? { ...c, phase: nextOnboardingPhase(c.phase) } : c,
+      ),
+    )
+    // If accelerating the provisioned client, regenerate creds
+    if (id === provisioning.clientId) {
+      setProvisioning((prev) => ({
+        ...prev,
+        accessKey: `ak_live_${makeHash(8)}...${makeHash(4)}`,
+        workspaceStatus: "Provisioned",
+        webhookStatus: "Verified",
+        webhookCode: 200,
+      }))
+    }
+  }
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200">
       {/* Top bar */}
@@ -250,6 +319,7 @@ export default function DashboardPage() {
               { key: "pipeline", label: "Pipeline Flow", Icon: Activity },
               { key: "data-state", label: "Data & State Manager", Icon: Database },
               { key: "qa-governance", label: "Automated QA & Governance", Icon: ShieldCheck },
+              { key: "client-onboarding", label: "Client Onboarding & Growth", Icon: TrendingUp },
             ] as const
           ).map(({ key, label, Icon }) => {
             const active = tab === key
@@ -305,13 +375,21 @@ export default function DashboardPage() {
             onRollback={handleRollback}
             onInspect={setInspectId}
           />
-        ) : (
+        ) : tab === "qa-governance" ? (
           <QaGovernance
             evaluations={evaluations}
             drift={drift}
             intercepts={intercepts}
             onApproveOverride={handleApproveOverride}
             onSendBack={handleSendBack}
+          />
+        ) : (
+          <ClientOnboarding
+            clients={clients}
+            resources={resources}
+            provisioning={provisioning}
+            onRevoke={handleRevokeCredentials}
+            onAccelerate={handleAccelerateClient}
           />
         )}
       </main>
