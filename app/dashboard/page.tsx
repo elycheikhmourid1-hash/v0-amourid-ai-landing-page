@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import { Cpu, Clock } from "lucide-react"
+import Link from "next/link"
+import { Cpu, Clock, ArrowLeft } from "lucide-react"
 import { MetricsBar } from "@/components/dashboard/metrics-bar"
 import { PipelineFeed } from "@/components/dashboard/pipeline-feed"
 import { ResilienceMatrix } from "@/components/dashboard/resilience-matrix"
@@ -110,6 +111,14 @@ export default function DashboardPage() {
       <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/90 backdrop-blur">
         <div className="mx-auto flex max-w-[1600px] items-center justify-between px-4 py-3 sm:px-6">
           <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              aria-label="Return to AICore Digital site"
+              title="Return to site"
+              className="flex h-8 w-8 items-center justify-center rounded-md border border-slate-700 bg-slate-900 text-slate-400 transition-colors hover:border-slate-600 hover:text-slate-200"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </Link>
             <span className="flex h-8 w-8 items-center justify-center rounded-md border border-slate-700 bg-slate-900">
               <Cpu className="h-4 w-4 text-cyan-400" />
             </span>
