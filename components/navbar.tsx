@@ -1,12 +1,14 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Activity } from "lucide-react"
 import { LeadFormDialog } from "@/components/lead-form-dialog"
 import { LogoMark } from "@/components/logo"
 
 const navLinks = [
+  { label: "Founder", href: "#founder" },
   { label: "Simulator", href: "#simulator" },
   { label: "Playground", href: "#playground" },
   { label: "Industries", href: "#industries" },
@@ -43,8 +45,19 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* CTA Button */}
-        <div className="hidden md:block">
+        {/* CTA Button + Activity Icon */}
+        <div className="hidden md:flex items-center gap-3">
+          <Link
+            href="/dashboard"
+            className="relative flex h-10 w-10 items-center justify-center rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 transition-all hover:bg-purple-500/20 hover:border-purple-500/50"
+            title="Operations Dashboard"
+          >
+            <Activity className="h-5 w-5" />
+            <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-purple-400 opacity-75" />
+              <span className="relative inline-flex h-3 w-3 rounded-full bg-purple-500" />
+            </span>
+          </Link>
           <LeadFormDialog>
             <Button size="default" className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-6 font-semibold transition-transform hover:scale-105">
               Free Consultation
@@ -52,14 +65,27 @@ export function Navbar() {
           </LeadFormDialog>
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          className="md:hidden text-foreground p-2"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-        >
-          {mobileOpen ? <X className="h-6 w-6 text-primary" /> : <Menu className="h-6 w-6" />}
-        </button>
+        {/* Mobile Toggle + Activity Icon */}
+        <div className="flex items-center gap-2 md:hidden">
+          <Link
+            href="/dashboard"
+            className="relative flex h-9 w-9 items-center justify-center rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400"
+            title="Operations Dashboard"
+          >
+            <Activity className="h-4 w-4" />
+            <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-purple-400 opacity-75" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-purple-500" />
+            </span>
+          </Link>
+          <button
+            className="text-foreground p-2"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          >
+            {mobileOpen ? <X className="h-6 w-6 text-primary" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

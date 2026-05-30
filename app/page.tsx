@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
+import { FounderMessage } from "@/components/founder-message"
 import { AutomationSimulator } from "@/components/automation-simulator"
 import { AgentPlayground } from "@/components/agent-playground"
 import { IndustrySimulator } from "@/components/industry-simulator"
@@ -15,6 +16,7 @@ export default function Home() {
     <main>
       <Navbar />
       <Hero />
+      <FounderMessage />
       <AutomationSimulator />
       <AgentPlayground />
       <IndustrySimulator />
