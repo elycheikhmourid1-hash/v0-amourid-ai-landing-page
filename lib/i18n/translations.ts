@@ -214,6 +214,29 @@ const en = {
   "services.integration.feature2": "Cloud infrastructure setup",
   "services.integration.feature3": "Security & compliance audits",
   "services.integration.feature4": "24/7 monitoring & support",
+  
+  // Founder Page
+  "founder.badge": "Meet the Founder",
+  "founder.name": "Ely Cheikh Mourid",
+  "founder.title": "Founder & CEO of AICore Digital",
+  "founder.subtitle": "Former First Lieutenant — 1st Parachute Commando Battalion, Mauritania",
+  "founder.training": "Military Communications Training at École de Transmission, Rennes, France",
+  "founder.education": "International Education in China",
+  "founder.languages": "Arabic, French, English",
+  "founder.location": "Richmond, Virginia, USA",
+  
+  "founder.story.title": "The Journey",
+  "founder.story.p1": "My path began in the demanding environment of military service as a First Lieutenant in Mauritania's elite 1st Parachute Commando Battalion. Those years forged an unshakeable foundation of discipline, precision, and the ability to lead under extreme pressure. Every mission demanded flawless execution — there was no room for error.",
+  "founder.story.p2": "The transition from military operations to AI automation wasn't a departure — it was an evolution. I recognized that the same principles that made military operations successful — systematic thinking, relentless optimization, and 24/7 operational readiness — could transform how businesses operate. I began building intelligent systems that never sleep, never miss a step, and execute with military precision.",
+  "founder.story.p3": "Today, AICore Digital exists to bridge the gap between cutting-edge AI technology and real business results. We don't just build automations — we engineer autonomous systems that think, adapt, and deliver measurable outcomes. My mission is simple: bring military-grade precision and reliability to every business we serve.",
+  
+  "founder.skills.title": "Expertise & Tools",
+  "founder.skills.tools": "n8n · Make.com · Relevance AI · Vercel",
+  "founder.skills.domains": "AI Automation · Agent Development · System Integration",
+  "founder.skills.traits": "Military Precision · Strategic Thinking · Flawless Execution",
+  
+  "founder.cta.work": "Work With Ely",
+  "founder.cta.services": "Explore Our Services",
 } as const
 
 const ar: Record<TranslationKey, string> = {
@@ -428,6 +451,29 @@ const ar: Record<TranslationKey, string> = {
   "services.integration.feature2": "إعداد البنية التحتية السحابية",
   "services.integration.feature3": "تدقيق الأمان والامتثال",
   "services.integration.feature4": "مراقبة ودعم على مدار الساعة",
+  
+  // Founder Page
+  "founder.badge": "تعرّف على المؤسس",
+  "founder.name": "إيلي الشيخ مريد",
+  "founder.title": "المؤسس والرئيس التنفيذي لـ AICore Digital",
+  "founder.subtitle": "ملازم أول سابق — الكتيبة الأولى للمظليين الكوماندوز، موريتانيا",
+  "founder.training": "تدريب الاتصالات العسكرية في مدرسة الإرسال، رين، فرنسا",
+  "founder.education": "تعليم دولي في الصين",
+  "founder.languages": "العربية، الفرنسية، الإنجليزية",
+  "founder.location": "ريتشموند، فيرجينيا، الولايات المتحدة الأمريكية",
+  
+  "founder.story.title": "الرحلة",
+  "founder.story.p1": "بدأت مسيرتي في البيئة الصعبة للخدمة العسكرية كملازم أول في كتيبة المظليين الكوماندوز الأولى النخبوية في موريتانيا. تلك السنوات صقلت أساساً راسخاً من الانضباط والدقة والقدرة على القيادة تحت ضغط شديد. كل مهمة تطلبت تنفيذاً لا تشوبه شائبة — لم يكن هناك مجال للخطأ.",
+  "founder.story.p2": "الانتقال من العمليات العسكرية إلى أتمتة الذكاء الاصطناعي لم يكن ابتعاداً — بل كان تطوراً. أدركت أن نفس المبادئ التي جعلت العمليات العسكرية ناجحة — التفكير المنهجي والتحسين المستمر والجاهزية التشغيلية على مدار الساعة — يمكن أن تحول طريقة عمل الشركات. بدأت ببناء أنظمة ذكية لا تنام أبداً، ولا تفوت خطوة، وتنفذ بدقة عسكرية.",
+  "founder.story.p3": "اليوم، توجد AICore Digital لسد الفجوة بين تقنية الذكاء الاصطناعي المتطورة ونتائج الأعمال الحقيقية. نحن لا نبني أتمتة فقط — بل نهندس أنظمة مستقلة تفكر وتتكيف وتقدم نتائج قابلة للقياس. مهمتي بسيطة: جلب الدقة والموثوقية العسكرية لكل شركة نخدمها.",
+  
+  "founder.skills.title": "الخبرات والأدوات",
+  "founder.skills.tools": "n8n · Make.com · Relevance AI · Vercel",
+  "founder.skills.domains": "أتمتة الذكاء الاصطناعي · تطوير الوكلاء · تكامل الأنظمة",
+  "founder.skills.traits": "دقة عسكرية · تفكير استراتيجي · تنفيذ لا تشوبه شائبة",
+  
+  "founder.cta.work": "اعمل مع إيلي",
+  "founder.cta.services": "استكشف خدماتنا",
 }
 
 const fr: Record<TranslationKey, string> = {
@@ -642,6 +688,29 @@ const fr: Record<TranslationKey, string> = {
   "services.integration.feature2": "Configuration infrastructure cloud",
   "services.integration.feature3": "Audits sécurité et conformité",
   "services.integration.feature4": "Monitoring et support 24h/24",
+  
+  // Founder Page
+  "founder.badge": "Rencontrez le Fondateur",
+  "founder.name": "Ely Cheikh Mourid",
+  "founder.title": "Fondateur & PDG d'AICore Digital",
+  "founder.subtitle": "Ancien Premier Lieutenant — 1er Bataillon de Commandos Parachutistes, Mauritanie",
+  "founder.training": "Formation Communications Militaires à l'École de Transmission, Rennes, France",
+  "founder.education": "Études Internationales en Chine",
+  "founder.languages": "Arabe, Français, Anglais",
+  "founder.location": "Richmond, Virginie, États-Unis",
+  
+  "founder.story.title": "Le Parcours",
+  "founder.story.p1": "Mon parcours a commencé dans l'environnement exigeant du service militaire en tant que Premier Lieutenant dans le 1er Bataillon d'élite de Commandos Parachutistes de Mauritanie. Ces années ont forgé une base inébranlable de discipline, de précision et de capacité à diriger sous pression extrême. Chaque mission exigeait une exécution sans faille — il n'y avait aucune place pour l'erreur.",
+  "founder.story.p2": "La transition des opérations militaires vers l'automatisation IA n'était pas un départ — c'était une évolution. J'ai reconnu que les mêmes principes qui rendaient les opérations militaires réussies — pensée systématique, optimisation permanente et disponibilité opérationnelle 24h/24 — pouvaient transformer le fonctionnement des entreprises. J'ai commencé à construire des systèmes intelligents qui ne dorment jamais, ne manquent jamais une étape et s'exécutent avec une précision militaire.",
+  "founder.story.p3": "Aujourd'hui, AICore Digital existe pour combler le fossé entre la technologie IA de pointe et les résultats commerciaux réels. Nous ne construisons pas simplement des automatisations — nous concevons des systèmes autonomes qui pensent, s'adaptent et délivrent des résultats mesurables. Ma mission est simple : apporter précision et fiabilité militaires à chaque entreprise que nous servons.",
+  
+  "founder.skills.title": "Expertise & Outils",
+  "founder.skills.tools": "n8n · Make.com · Relevance AI · Vercel",
+  "founder.skills.domains": "Automatisation IA · Développement d'Agents · Intégration Systèmes",
+  "founder.skills.traits": "Précision Militaire · Pensée Stratégique · Exécution Sans Faille",
+  
+  "founder.cta.work": "Travailler Avec Ely",
+  "founder.cta.services": "Explorer Nos Services",
 }
 
 export const translations: Record<Locale, Record<TranslationKey, string>> = {

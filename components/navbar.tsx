@@ -10,7 +10,7 @@ import { LanguageSwitcher } from "@/components/language-switcher"
 import { useTranslation } from "@/lib/i18n"
 
 const navLinkKeys = [
-  { key: "nav.founder" as const, href: "#founder" },
+  { key: "nav.founder" as const, href: "/founder", isRoute: true },
   { key: "nav.simulator" as const, href: "#simulator" },
   { key: "nav.playground" as const, href: "#playground" },
   { key: "nav.industries" as const, href: "#industries" },
