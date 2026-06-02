@@ -174,6 +174,46 @@ const en = {
   "common.close": "Close",
   "common.open": "Open",
   "common.menu": "Menu",
+  
+  // Services Page
+  "services.badge": "Enterprise Solutions",
+  "services.title": "Our",
+  "services.titleHighlight": "Services",
+  "services.subtitle": "We deliver end-to-end AI automation solutions that transform how businesses operate. From intelligent workflows to custom AI agents, we build systems that work 24/7.",
+  "services.cta": "Book a Free Strategy Call",
+  "services.backToHome": "Back to Home",
+  
+  "services.workflow.title": "AI Workflow Automation",
+  "services.workflow.description": "Design and deploy intelligent automation pipelines that connect your entire tech stack. We eliminate manual data entry, synchronize systems in real-time, and create self-healing workflows that adapt to changing business needs.",
+  "services.workflow.tools": "n8n, Make.com, Zapier",
+  "services.workflow.feature1": "Custom trigger-based automations",
+  "services.workflow.feature2": "Multi-platform data synchronization",
+  "services.workflow.feature3": "Error handling & retry logic",
+  "services.workflow.feature4": "Real-time monitoring dashboards",
+  
+  "services.agents.title": "AI Agent Development",
+  "services.agents.description": "Build autonomous AI agents that reason, plan, and execute complex business tasks. Our agents integrate with your existing tools, learn from interactions, and operate around the clock with minimal human oversight.",
+  "services.agents.tools": "ChatGPT, Relevance AI",
+  "services.agents.feature1": "Custom-trained conversational agents",
+  "services.agents.feature2": "Tool-calling & API integration",
+  "services.agents.feature3": "Multi-step reasoning chains",
+  "services.agents.feature4": "Continuous learning & improvement",
+  
+  "services.crm.title": "CRM & Sales Automation",
+  "services.crm.description": "Supercharge your sales pipeline with intelligent lead scoring, automated follow-ups, and predictive analytics. We integrate AI directly into your CRM to help your team close more deals faster.",
+  "services.crm.tools": "HubSpot, GoHighLevel",
+  "services.crm.feature1": "AI-powered lead qualification",
+  "services.crm.feature2": "Automated email sequences",
+  "services.crm.feature3": "Pipeline analytics & forecasting",
+  "services.crm.feature4": "Smart task prioritization",
+  
+  "services.integration.title": "System Integration & Deployment",
+  "services.integration.description": "Seamlessly connect disparate systems and deploy production-ready automation infrastructure. We ensure your AI solutions are secure, scalable, and fully integrated with your existing workflows.",
+  "services.integration.tools": "Vercel, Slack, Gmail",
+  "services.integration.feature1": "API design & development",
+  "services.integration.feature2": "Cloud infrastructure setup",
+  "services.integration.feature3": "Security & compliance audits",
+  "services.integration.feature4": "24/7 monitoring & support",
 } as const
 
 const ar: Record<TranslationKey, string> = {
@@ -348,6 +388,46 @@ const ar: Record<TranslationKey, string> = {
   "common.close": "إغلاق",
   "common.open": "فتح",
   "common.menu": "القائمة",
+  
+  // Services Page
+  "services.badge": "حلول المؤسسات",
+  "services.title": "خدماتنا",
+  "services.titleHighlight": "المتكاملة",
+  "services.subtitle": "نقدم حلول أتمتة الذكاء الاصطناعي الشاملة التي تحول طريقة عمل الشركات. من سير العمل الذكي إلى وكلاء الذكاء الاصطناعي المخصصين، نبني أنظمة تعمل على مدار الساعة.",
+  "services.cta": "احجز مكالمة استراتيجية مجانية",
+  "services.backToHome": "العودة للرئيسية",
+  
+  "services.workflow.title": "أتمتة سير العمل بالذكاء الاصطناعي",
+  "services.workflow.description": "تصميم ونشر خطوط أتمتة ذكية تربط جميع أنظمتك التقنية. نحن نلغي إدخال البيانات يدوياً، ونزامن الأنظمة في الوقت الفعلي، وننشئ سير عمل ذاتي الإصلاح يتكيف مع احتياجات العمل المتغيرة.",
+  "services.workflow.tools": "n8n، Make.com، Zapier",
+  "services.workflow.feature1": "أتمتة مخصصة تعتمد على المحفزات",
+  "services.workflow.feature2": "مزامنة البيانات متعددة المنصات",
+  "services.workflow.feature3": "معالجة الأخطاء ومنطق إعادة المحاولة",
+  "services.workflow.feature4": "لوحات مراقبة في الوقت الفعلي",
+  
+  "services.agents.title": "تطوير وكلاء الذكاء الاصطناعي",
+  "services.agents.description": "بناء وكلاء ذكاء اصطناعي مستقلين يفكرون ويخططون وينفذون مهام تجارية معقدة. وكلاؤنا يتكاملون مع أدواتك الحالية، ويتعلمون من التفاعلات، ويعملون على مدار الساعة بأقل إشراف بشري.",
+  "services.agents.tools": "ChatGPT، Relevance AI",
+  "services.agents.feature1": "وكلاء محادثة مدربون خصيصاً",
+  "services.agents.feature2": "استدعاء الأدوات وتكامل API",
+  "services.agents.feature3": "سلاسل استدلال متعددة الخطوات",
+  "services.agents.feature4": "تعلم وتحسين مستمر",
+  
+  "services.crm.title": "أتمتة CRM والمبيعات",
+  "services.crm.description": "عزز خط مبيعاتك بتسجيل العملاء المحتملين الذكي والمتابعات الآلية والتحليلات التنبؤية. نحن ندمج الذكاء الاصطناعي مباشرة في CRM الخاص بك لمساعدة فريقك على إغلاق المزيد من الصفقات بشكل أسرع.",
+  "services.crm.tools": "HubSpot، GoHighLevel",
+  "services.crm.feature1": "تأهيل العملاء المحتملين بالذكاء الاصطناعي",
+  "services.crm.feature2": "تسلسلات بريد إلكتروني آلية",
+  "services.crm.feature3": "تحليلات وتوقعات خط الأنابيب",
+  "services.crm.feature4": "ترتيب أولويات المهام الذكي",
+  
+  "services.integration.title": "تكامل الأنظمة والنشر",
+  "services.integration.description": "ربط الأنظمة المتباينة بسلاسة ونشر بنية تحتية للأتمتة جاهزة للإنتاج. نضمن أن حلول الذكاء الاصطناعي الخاصة بك آمنة وقابلة للتوسع ومتكاملة تماماً مع سير عملك الحالي.",
+  "services.integration.tools": "Vercel، Slack، Gmail",
+  "services.integration.feature1": "تصميم وتطوير API",
+  "services.integration.feature2": "إعداد البنية التحتية السحابية",
+  "services.integration.feature3": "تدقيق الأمان والامتثال",
+  "services.integration.feature4": "مراقبة ودعم على مدار الساعة",
 }
 
 const fr: Record<TranslationKey, string> = {
@@ -522,6 +602,46 @@ const fr: Record<TranslationKey, string> = {
   "common.close": "Fermer",
   "common.open": "Ouvrir",
   "common.menu": "Menu",
+  
+  // Services Page
+  "services.badge": "Solutions Entreprise",
+  "services.title": "Nos",
+  "services.titleHighlight": "Services",
+  "services.subtitle": "Nous fournissons des solutions d'automatisation IA complètes qui transforment le fonctionnement des entreprises. Des workflows intelligents aux agents IA personnalisés, nous construisons des systèmes qui fonctionnent 24h/24.",
+  "services.cta": "Réserver un Appel Stratégique Gratuit",
+  "services.backToHome": "Retour à l'Accueil",
+  
+  "services.workflow.title": "Automatisation de Workflows IA",
+  "services.workflow.description": "Concevez et déployez des pipelines d'automatisation intelligents qui connectent l'ensemble de votre stack technologique. Nous éliminons la saisie manuelle des données, synchronisons les systèmes en temps réel et créons des workflows auto-réparateurs qui s'adaptent à l'évolution des besoins.",
+  "services.workflow.tools": "n8n, Make.com, Zapier",
+  "services.workflow.feature1": "Automatisations basées sur des déclencheurs",
+  "services.workflow.feature2": "Synchronisation multi-plateformes",
+  "services.workflow.feature3": "Gestion des erreurs et logique de retry",
+  "services.workflow.feature4": "Tableaux de bord de monitoring temps réel",
+  
+  "services.agents.title": "Développement d'Agents IA",
+  "services.agents.description": "Construisez des agents IA autonomes qui raisonnent, planifient et exécutent des tâches métier complexes. Nos agents s'intègrent à vos outils existants, apprennent des interactions et fonctionnent 24h/24 avec une supervision humaine minimale.",
+  "services.agents.tools": "ChatGPT, Relevance AI",
+  "services.agents.feature1": "Agents conversationnels sur mesure",
+  "services.agents.feature2": "Appels d'outils et intégration API",
+  "services.agents.feature3": "Chaînes de raisonnement multi-étapes",
+  "services.agents.feature4": "Apprentissage et amélioration continus",
+  
+  "services.crm.title": "Automatisation CRM & Ventes",
+  "services.crm.description": "Boostez votre pipeline commercial avec un scoring de leads intelligent, des relances automatisées et des analyses prédictives. Nous intégrons l'IA directement dans votre CRM pour aider votre équipe à conclure plus rapidement.",
+  "services.crm.tools": "HubSpot, GoHighLevel",
+  "services.crm.feature1": "Qualification de leads par IA",
+  "services.crm.feature2": "Séquences d'emails automatisées",
+  "services.crm.feature3": "Analyses et prévisions du pipeline",
+  "services.crm.feature4": "Priorisation intelligente des tâches",
+  
+  "services.integration.title": "Intégration & Déploiement Systèmes",
+  "services.integration.description": "Connectez de manière transparente des systèmes disparates et déployez une infrastructure d'automatisation prête pour la production. Nous garantissons que vos solutions IA sont sécurisées, évolutives et entièrement intégrées à vos workflows existants.",
+  "services.integration.tools": "Vercel, Slack, Gmail",
+  "services.integration.feature1": "Conception et développement d'API",
+  "services.integration.feature2": "Configuration infrastructure cloud",
+  "services.integration.feature3": "Audits sécurité et conformité",
+  "services.integration.feature4": "Monitoring et support 24h/24",
 }
 
 export const translations: Record<Locale, Record<TranslationKey, string>> = {

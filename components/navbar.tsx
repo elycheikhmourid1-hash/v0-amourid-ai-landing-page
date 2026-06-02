@@ -14,7 +14,7 @@ const navLinkKeys = [
   { key: "nav.simulator" as const, href: "#simulator" },
   { key: "nav.playground" as const, href: "#playground" },
   { key: "nav.industries" as const, href: "#industries" },
-  { key: "nav.services" as const, href: "#services" },
+  { key: "nav.services" as const, href: "/services", isRoute: true },
   { key: "nav.contact" as const, href: "#contact" },
 ]
 
@@ -37,15 +37,25 @@ export function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-8 md:flex">
-          {navLinkKeys.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-all hover:text-primary"
-            >
-              {t(link.key)}
-            </a>
-          ))}
+          {navLinkKeys.map((link) => 
+            link.isRoute ? (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground transition-all hover:text-primary"
+              >
+                {t(link.key)}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground transition-all hover:text-primary"
+              >
+                {t(link.key)}
+              </a>
+            )
+          )}
         </nav>
 
         {/* CTA Button + Language Switcher + Activity Icon */}
@@ -97,16 +107,27 @@ export function Navbar() {
       {mobileOpen && (
         <div className="absolute top-full left-0 right-0 border-b border-border bg-background/95 backdrop-blur-lg px-6 py-8 md:hidden shadow-2xl animate-in slide-in-from-top-4 duration-200">
           <nav className="flex flex-col gap-6 text-center">
-            {navLinkKeys.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="text-lg font-semibold text-muted-foreground transition-colors hover:text-primary"
-              >
-                {t(link.key)}
-              </a>
-            ))}
+            {navLinkKeys.map((link) => 
+              link.isRoute ? (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="text-lg font-semibold text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {t(link.key)}
+                </Link>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="text-lg font-semibold text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {t(link.key)}
+                </a>
+              )
+            )}
             <div className="pt-4 border-t border-border">
               <LeadFormDialog>
                 <Button size="lg" className="w-full rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg">
