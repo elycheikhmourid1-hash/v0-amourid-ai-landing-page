@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Space_Grotesk, Noto_Sans_Arabic } from 'next/font/google'
+import { Inter, Space_Grotesk, Noto_Sans_Arabic, Tajawal } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { LanguageProvider } from '@/lib/i18n'
 import './globals.css'
 
 const inter = Inter({
@@ -17,6 +18,13 @@ const spaceGrotesk = Space_Grotesk({
 const notoArabic = Noto_Sans_Arabic({
   subsets: ['arabic'],
   variable: '--font-noto-arabic',
+})
+
+// Premium Arabic font for localized UI (sleek tech aesthetic)
+const tajawal = Tajawal({
+  subsets: ['arabic'],
+  weight: ['400', '500', '700', '800'],
+  variable: '--font-tajawal',
 })
 
 export const metadata: Metadata = {
@@ -84,9 +92,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${notoArabic.variable}`}>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${notoArabic.variable} ${tajawal.variable}`}>
       <body className="font-sans antialiased">
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>
