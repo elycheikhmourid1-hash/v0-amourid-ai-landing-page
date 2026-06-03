@@ -19,13 +19,16 @@ const en = {
   "nav.dashboard": "Operations Dashboard",
   
   // Hero
-  "hero.badge": "Next-Gen Robotics & AI Automation",
-  "hero.title1": "AICore",
-  "hero.title2": "Digital",
+  "hero.badge": "Now serving B2B companies across Virginia",
+  "hero.title1": "Stop Chasing",
+  "hero.title2": "Leads.",
+  "hero.title3": "Start Closing",
+  "hero.title4": "Them.",
   "hero.mainHeading": "See an autonomous AI agent think and act",
-  "hero.subtitle": "Trigger a live demo and watch the agent reason, call tools, query data, and complete a real automation — exactly how our production agents operate.",
-  "hero.cta.primary": "Free Consultation",
-  "hero.cta.secondary": "Explore Solutions",
+  "hero.subtitle": "We build AI-powered sales systems that find your ideal clients, send personalized outreach, and book qualified meetings into your calendar — automatically.",
+  "hero.cta.primary": "Get Your Free Pipeline Audit",
+  "hero.cta.secondary": "See How It Works",
+  "hero.location": "Based in Richmond, Virginia - Serving B2B companies across the state",
   
   // CTA
   "cta.freeConsultation": "Free Consultation",
@@ -274,7 +277,7 @@ const ar: Record<TranslationKey, string> = {
   // Founder Section
   "founder.title": "قيادة",
   "founder.titleHighlight": "الرؤية",
-  "founder.name": "إيلي الشيخ مريد",
+  "founder.name": "Ely Cheikh Mourid",
   "founder.role": "المؤسس والرئيس التنفيذي",
   "founder.description": "رائد في مستقبل الأتمتة الذكية، يقدم حلول ذكاء اصطناعي بمستوى المؤسسات لجميع أحجام الأعمال.",
   "founder.playVideo": "تشغيل الفيديو",
@@ -298,7 +301,7 @@ const ar: Record<TranslationKey, string> = {
   "industries.title": "دليل",
   "industries.titleHighlight": "القطاعات المخصص",
   "industries.subtitle": "شاهد سيناريوهات الأتمتة الحقيقية. اختر قطاعاً لترى كيف ننظم الذكاء الاصطناعي + التكاملات لأقصى عائد.",
-  "industries.result": "النتيجة:",
+  "industries.result": "النت��جة:",
   
   // Services
   "services.title": "ما",
@@ -454,7 +457,7 @@ const ar: Record<TranslationKey, string> = {
   
   // Founder Page
   "founder.badge": "تعرّف على المؤسس",
-  "founder.name": "إيلي الشيخ مريد",
+  "founder.name": "Ely Cheikh Mourid",
   "founder.title": "المؤسس والرئيس التنفيذي لـ AICore Digital",
   "founder.subtitle": "ملازم أول سابق — الكتيبة الأولى للمظليين الكوماندوز، موريتانيا",
   "founder.training": "تدريب الاتصالات العسكرية في مدرسة الإرسال، رين، فرنسا",
@@ -472,7 +475,7 @@ const ar: Record<TranslationKey, string> = {
   "founder.skills.domains": "أتمتة الذكاء الاصطناعي · تطوير الوكلاء · تكامل الأنظمة",
   "founder.skills.traits": "دقة عسكرية · تفكير استراتيجي · تنفيذ لا تشوبه شائبة",
   
-  "founder.cta.work": "اعمل مع إيلي",
+  "founder.cta.work": "اعمل مع Ely",
   "founder.cta.services": "استكشف خدماتنا",
 }
 
