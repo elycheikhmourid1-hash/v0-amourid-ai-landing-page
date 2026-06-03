@@ -1,3 +1,4 @@
+```typescriptreact
 import { FileText, BarChart3, MessageSquare } from "lucide-react"
 import { TiltCard } from "@/components/tilt-card"
 import { Reveal } from "@/components/reveal"
@@ -78,3 +79,5 @@ export function Services() {
     </section>
   )
 }
+
+```
