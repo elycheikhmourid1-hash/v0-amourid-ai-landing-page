@@ -111,6 +111,7 @@ export async function POST(request: Request) {
     subject: "We received your request — AICore Digital",
     html: `
       <div style="font-family: ui-sans-serif, system-ui, sans-serif; max-width: 560px; margin: 0 auto;">
+        <div style="text-align:center; margin-bottom:24px; padding:16px; background:#0a0a0a;"><img src="https://aicoredigital.com/logo.png" alt="AICore Digital" style="height:70px; width:auto;" /></div>
         <h2 style="color: #7c3aed;">Thank you, ${firstName}!</h2>
         <p style="color: #0f172a;">We've received your request and will contact you within <strong>24 hours</strong>.</p>
         <p style="color: #0f172a;">In the meantime, feel free to explore our services at <a href="https://www.aicoredigital.com" style="color: #7c3aed;">aicoredigital.com</a></p>
