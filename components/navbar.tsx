@@ -10,7 +10,7 @@ import { LanguageSwitcher } from "@/components/language-switcher"
 
 const links = [
   { label: "Founder", href: "/founder", route: true },
-  { label: "Work", href: "#services", route: false },
+  { label: "Desk", href: "/desk", route: true },
   { label: "Services", href: "/services", route: true },
   { label: "Contact", href: "#contact", route: false },
 ]
