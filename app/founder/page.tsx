@@ -7,27 +7,21 @@ import {
   MapPin,
   Languages,
   GraduationCap,
-  Shield,
-  Sparkles,
-  ArrowRight,
-  Target,
-  Cpu,
+  Mail,
+  Phone,
+  Building2,
+  Radio,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { LogoMark } from "@/components/logo"
-import { LeadFormDialog } from "@/components/lead-form-dialog"
 import { LanguageSwitcher } from "@/components/language-switcher"
 
 const container = {
   hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
+  show: { opacity: 1, transition: { staggerChildren: 0.08 } },
 }
-
 const item = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0 },
 }
 
@@ -35,155 +29,104 @@ export default function FounderPage() {
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
+        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+          <Link href="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4" />
             <LogoMark box={28} />
-            <span className="font-mono text-xs font-bold uppercase tracking-wider">
-              AICore Digital LLC
-            </span>
+            <span className="font-mono text-xs font-bold uppercase tracking-wider">AICore Digital LLC</span>
           </Link>
           <LanguageSwitcher />
         </div>
       </header>
 
-      <main className="mx-auto max-w-5xl px-6 py-16">
-        <motion.div variants={container} initial="hidden" animate="show" className="space-y-16">
-          <motion.section variants={item} className="text-center">
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-              <Shield className="h-4 w-4" />
-              Founder
-            </div>
-
-            <h1 className="mb-4 text-5xl font-black tracking-tight md:text-7xl">
-              <span className="shimmer">Ely Cheikh Mourid</span>
-            </h1>
-            <p className="mb-2 text-xl font-semibold text-foreground md:text-2xl">
-              Founder and CEO, AICore Digital LLC
+      <main className="mx-auto max-w-3xl px-6 py-16">
+        <motion.div variants={container} initial="hidden" animate="show" className="space-y-14">
+          <motion.section variants={item}>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Founder</p>
+            <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">Ely Cheikh Mourid</h1>
+            <p className="mt-3 text-lg text-muted-foreground">
+              Founder and Chief Executive Officer, AICore Digital LLC, Richmond, Virginia.
             </p>
-            <p className="mb-8 text-base text-muted-foreground md:text-lg">
-              Information systems and transmissions officer, Mauritanian armed forces.
-              Graduate, École militaire des transmissions, Rennes, France.
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Former information systems and transmissions officer in the Mauritanian armed forces.
+              Graduate of the École militaire des transmissions, Rennes, France.
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <div className="flex items-center gap-2 rounded-full border border-border/50 bg-secondary/50 px-4 py-2 text-sm">
-                <MapPin className="h-4 w-4 text-cyan-400" />
-                <span className="text-muted-foreground">Richmond, Virginia, USA</span>
+            <dl className="mt-8 grid gap-3 text-sm sm:grid-cols-2">
+              <div className="flex items-center gap-3 rounded-lg border border-border px-4 py-3">
+                <MapPin className="h-4 w-4 shrink-0 text-muted-foreground" />
+                <div>
+                  <dt className="text-xs text-muted-foreground">Office</dt>
+                  <dd>Richmond, Virginia, USA</dd>
+                </div>
               </div>
-              <div className="flex items-center gap-2 rounded-full border border-border/50 bg-secondary/50 px-4 py-2 text-sm">
-                <Languages className="h-4 w-4 text-purple-400" />
-                <span className="text-muted-foreground">Arabic, French, English</span>
+              <div className="flex items-center gap-3 rounded-lg border border-border px-4 py-3">
+                <Languages className="h-4 w-4 shrink-0 text-muted-foreground" />
+                <div>
+                  <dt className="text-xs text-muted-foreground">Languages</dt>
+                  <dd>Arabic, French, English</dd>
+                </div>
               </div>
-              <div className="flex items-center gap-2 rounded-full border border-border/50 bg-secondary/50 px-4 py-2 text-sm">
-                <GraduationCap className="h-4 w-4 text-emerald-400" />
-                <span className="text-muted-foreground">Transmissions school, Rennes</span>
+              <div className="flex items-center gap-3 rounded-lg border border-border px-4 py-3">
+                <GraduationCap className="h-4 w-4 shrink-0 text-muted-foreground" />
+                <div>
+                  <dt className="text-xs text-muted-foreground">Training</dt>
+                  <dd>École militaire des transmissions, Rennes</dd>
+                </div>
               </div>
+              <div className="flex items-center gap-3 rounded-lg border border-border px-4 py-3">
+                <Building2 className="h-4 w-4 shrink-0 text-muted-foreground" />
+                <div>
+                  <dt className="text-xs text-muted-foreground">Entity</dt>
+                  <dd>AICore Digital LLC</dd>
+                </div>
+              </div>
+            </dl>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Button asChild className="rounded-full">
+                <a href="mailto:elycheikh@aicoredigital.com">
+                  <Mail className="mr-2 h-4 w-4" />
+                  elycheikh@aicoredigital.com
+                </a>
+              </Button>
+              <Button asChild variant="outline" className="rounded-full">
+                <a href="tel:+18044853384">
+                  <Phone className="mr-2 h-4 w-4" />
+                  +1 (804) 485-3384
+                </a>
+              </Button>
             </div>
           </motion.section>
 
-          <motion.section variants={item} className="space-y-8">
-            <div className="flex items-center justify-center gap-3">
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-              <h2 className="text-center text-2xl font-bold tracking-tight md:text-3xl">Background</h2>
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-3">
-              <motion.div variants={item} className="rounded-2xl border border-border/50 bg-gradient-to-b from-secondary/80 to-secondary/40 p-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400">
-                  <Shield className="h-6 w-6" />
-                </div>
-                <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-                  Served as an officer of the Mauritanian armed forces, including the 1st Parachute Commando Battalion, with a specialty in information systems and transmissions. That work was communications and coordination, not a product line.
-                </p>
-              </motion.div>
-
-              <motion.div variants={item} className="rounded-2xl border border-border/50 bg-gradient-to-b from-secondary/80 to-secondary/40 p-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/10 text-purple-400">
-                  <Cpu className="h-6 w-6" />
-                </div>
-                <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-                  Trained at the École militaire des transmissions in Rennes. The company exists to apply that discipline to supervised software: routing, case instruction, and audit logs — with a person on the decision.
-                </p>
-              </motion.div>
-
-              <motion.div variants={item} className="rounded-2xl border border-border/50 bg-gradient-to-b from-secondary/80 to-secondary/40 p-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400">
-                  <Target className="h-6 w-6" />
-                </div>
-                <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-                  AICore Digital LLC is registered in Virginia. The practice is founder-led. We do not publish invented clients, and we do not train foundation models on a client’s files.
-                </p>
-              </motion.div>
-            </div>
+          <motion.section variants={item} className="space-y-4 border-t border-border pt-10">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">Service</h2>
+            <p className="text-base leading-relaxed text-muted-foreground">
+              Officer of the Mauritanian armed forces, including service with the 1st Parachute Commando Battalion, with a specialty in information systems and transmissions. The company is not a military contractor. That background is communications work, listed here as biography.
+            </p>
           </motion.section>
 
-          <motion.section variants={item} className="space-y-8">
-            <div className="flex items-center justify-center gap-3">
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-              <h2 className="text-center text-2xl font-bold tracking-tight md:text-3xl">Practice</h2>
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border border-border/50 bg-secondary/30 p-6 text-center">
-                <div className="mb-4 flex items-center justify-center">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-500/20 to-purple-500/20 text-purple-400">
-                    <Sparkles className="h-5 w-5" />
-                  </div>
-                </div>
-                <p className="font-mono text-sm font-medium text-foreground">Supervised automation</p>
-              </div>
-              <div className="rounded-2xl border border-border/50 bg-secondary/30 p-6 text-center">
-                <div className="mb-4 flex items-center justify-center">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 text-cyan-400">
-                    <Cpu className="h-5 w-5" />
-                  </div>
-                </div>
-                <p className="font-mono text-sm font-medium text-foreground">Institutional instruction desks</p>
-              </div>
-              <div className="rounded-2xl border border-border/50 bg-secondary/30 p-6 text-center">
-                <div className="mb-4 flex items-center justify-center">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-amber-500/20 to-orange-500/20 text-amber-400">
-                    <Target className="h-5 w-5" />
-                  </div>
-                </div>
-                <p className="font-mono text-sm font-medium text-foreground">Human-in-the-loop</p>
-              </div>
-            </div>
+          <motion.section variants={item} className="space-y-4">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">Practice</h2>
+            <p className="text-base leading-relaxed text-muted-foreground">
+              Supervised automation for companies. Instruction desks for institutions. A named person records decisions. Client data is not used to train foundation models. Hosting is the location named in the statement of work.
+            </p>
+            <p className="flex items-start gap-2 text-sm text-muted-foreground">
+              <Radio className="mt-0.5 h-4 w-4 shrink-0" />
+              Founder-led. No invented testimonials.
+            </p>
           </motion.section>
 
-          <motion.section
-            variants={item}
-            className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-background to-cyan-500/10 p-8 text-center md:p-12"
-          >
-            <div className="relative z-10 space-y-6">
-              <h2 className="text-2xl font-bold tracking-tight md:text-3xl">Request a 30-minute call</h2>
-              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <LeadFormDialog>
-                  <Button
-                    size="lg"
-                    className="h-14 rounded-full bg-gradient-to-r from-fuchsia-600 via-purple-600 to-cyan-500 px-8 text-lg font-bold text-white shadow-xl shadow-purple-500/25"
-                  >
-                    Book a call
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </LeadFormDialog>
-                <Link href="/services">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="h-14 rounded-full border-2 border-border/50 bg-transparent px-8 text-lg font-semibold"
-                  >
-                    Services
-                  </Button>
-                </Link>
-              </div>
-            </div>
+          <motion.section variants={item} className="flex flex-wrap gap-3 border-t border-border pt-10">
+            <Button asChild variant="outline" className="rounded-full">
+              <Link href="/services">Services</Link>
+            </Button>
+            <Button asChild variant="ghost" className="rounded-full">
+              <Link href="/privacy">Privacy</Link>
+            </Button>
+            <Button asChild variant="ghost" className="rounded-full">
+              <Link href="/">Home</Link>
+            </Button>
           </motion.section>
         </motion.div>
       </main>
