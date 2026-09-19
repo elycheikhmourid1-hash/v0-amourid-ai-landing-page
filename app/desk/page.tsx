@@ -64,7 +64,7 @@ function pstdev(xs: number[]) {
 }
 function analyze(c: CaseRow) {
   const flags: Flag[] = []
-  const missing = c.required_clauses.filter((x) => !c.clauses.includes(x))
+  const missing = (c.required_clauses || []).filter((x) => !(c.clauses || []).includes(x))
   if (missing.length) {
     flags.push({
       code: "MISSING_CLAUSE",
@@ -72,7 +72,7 @@ function analyze(c: CaseRow) {
       detail: "Missing: " + missing.join(", "),
     })
   }
-  if (c.deadline < c.published) {
+  if (c.deadline && c.published && c.deadline < c.published) {
     flags.push({
       code: "DEADLINE_BEFORE_PUBLISH",
       severity: "critical",
@@ -80,19 +80,23 @@ function analyze(c: CaseRow) {
     })
   }
   const days = Math.round((Date.parse(c.deadline) - Date.parse(c.published)) / 86400000)
-  if (days >= 0 && days < 10) {
+  if (Number.isFinite(days) && days >= 0 && days < 10) {
     flags.push({ code: "SHORT_BID_WINDOW", severity: "medium", detail: `Bid window ${days} days.` })
   }
-  if (c.peer_amounts.length >= 3) {
-    const sd = pstdev(c.peer_amounts)
-    const z = sd === 0 ? 0 : (c.amount - mean(c.peer_amounts)) / sd
+  const peers = c.peer_amounts || []
+  if (peers.length >= 3) {
+    const sd = pstdev(peers)
+    const z = sd === 0 ? 0 : (Number(c.amount) - mean(peers)) / sd
     if (Math.abs(z) >= 2.5) {
       flags.push({
         code: "PRICE_OUTLIER",
         severity: "high",
-        detail: `Amount z-score ${z.toFixed(2)} versus ${c.peer_amounts.length} peers.`,
+        detail: `Amount z-score ${z.toFixed(2)} versus ${peers.length} peers.`,
       })
     }
+  }
+  if (!c.buyer) {
+    flags.push({ code: "NO_BUYER", severity: "high", detail: "Buyer field empty." })
   }
   const score = Math.min(
     100,
@@ -101,9 +105,80 @@ function analyze(c: CaseRow) {
   return { ...c, flags, score, status: flags.length ? "needs_human_review" : "clear" }
 }
 
+function normalize(raw: unknown): CaseRow[] {
+  const list = Array.isArray(raw) ? raw : Array.isArray((raw as { cases?: unknown }).cases) ? (raw as { cases: unknown[] }).cases : []
+  return list.map((item, i) => {
+    const c = item as Partial<CaseRow>
+    return {
+      id: String(c.id || `ROW-${i + 1}`),
+      title: String(c.title || "Untitled"),
+      buyer: String(c.buyer || ""),
+      published: String(c.published || ""),
+      deadline: String(c.deadline || ""),
+      amount: Number(c.amount || 0),
+      peer_amounts: Array.isArray(c.peer_amounts) ? c.peer_amounts.map(Number) : [],
+      clauses: Array.isArray(c.clauses) ? c.clauses.map(String) : [],
+      required_clauses: Array.isArray(c.required_clauses) ? c.required_clauses.map(String) : [],
+    }
+  })
+}
+
 export default function DeskPage() {
-  const rows = useMemo(() => SAMPLE.map(analyze), [])
+  const [pack, setPack] = useState<CaseRow[]>(SAMPLE)
+  const [source, setSource] = useState("sample")
+  const [error, setError] = useState("")
   const [decisions, setDecisions] = useState<Record<string, string>>({})
+  const rows = useMemo(() => pack.map(analyze), [pack])
+
+  function onFile(file: File | undefined) {
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(String(reader.result))
+        const next = normalize(parsed)
+        if (!next.length) throw new Error("No cases in file")
+        setPack(next)
+        setDecisions({})
+        setSource(file.name)
+        setError("")
+      } catch {
+        setError("JSON must be an array of cases, or { cases: [...] }.")
+      }
+    }
+    reader.readAsText(file)
+  }
+
+  function exportDecisions() {
+    const blob = new Blob(
+      [
+        JSON.stringify(
+          {
+            processor: "AICore Digital LLC",
+            operator: "elycheikh@aicoredigital.com",
+            source,
+            decisions: rows.map((r) => ({
+              case_id: r.id,
+              title: r.title,
+              status: r.status,
+              score: r.score,
+              flags: r.flags,
+              decision: decisions[r.id] || null,
+            })),
+          },
+          null,
+          2
+        ),
+      ],
+      { type: "application/json" }
+    )
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "aicore-desk-review.json"
+    a.click()
+    URL.revokeObjectURL(url)
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -114,19 +189,55 @@ export default function DeskPage() {
             <LogoMark box={28} />
             <span className="font-mono text-xs font-bold uppercase">AICore Digital LLC</span>
           </Link>
-          <span className="text-xs text-muted-foreground">Instruction Desk · sample data only</span>
+          <span className="text-xs text-muted-foreground">Instruction Desk · {source}</span>
         </div>
       </header>
 
       <main className="mx-auto max-w-5xl px-6 py-12 space-y-8">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Product</p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight">Instruction Desk</h1>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Flags missing clauses, impossible dates, and statistical price outliers on records the client supplies.
-            No ministry is queried. A person records the decision. AICore Digital LLC is processor only.
-          </p>
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Product</p>
+            <h1 className="mt-2 text-3xl font-semibold tracking-tight">Instruction Desk</h1>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              Flags missing clauses, impossible dates, and statistical price outliers on records the client supplies.
+              No ministry is queried. A person records the decision. AICore Digital LLC is processor only.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Button asChild variant="outline" className="rounded-full">
+              <a href="/sample-cases.json" download>
+                Download sample JSON
+              </a>
+            </Button>
+            <Button variant="outline" className="rounded-full" asChild>
+              <label className="cursor-pointer">
+                Upload JSON
+                <input
+                  type="file"
+                  accept="application/json,.json"
+                  className="hidden"
+                  onChange={(e) => onFile(e.target.files?.[0])}
+                />
+              </label>
+            </Button>
+            <Button
+              variant="outline"
+              className="rounded-full"
+              onClick={() => {
+                setPack(SAMPLE)
+                setDecisions({})
+                setSource("sample")
+                setError("")
+              }}
+            >
+              Reset sample
+            </Button>
+            <Button className="rounded-full" onClick={exportDecisions}>
+              Export review
+            </Button>
+          </div>
         </div>
+        {error && <p className="text-sm text-red-400">{error}</p>}
 
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="rounded-xl border border-border p-4">
