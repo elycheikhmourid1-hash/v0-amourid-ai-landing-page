@@ -6,7 +6,6 @@ import { InteractiveGrid } from "@/components/interactive-grid"
 import { WorkflowAnimation } from "@/components/workflow-animation"
 import { Magnetic } from "@/components/magnetic"
 import { motion } from "motion/react"
-import { useTranslation } from "@/lib/i18n"
 
 const container = {
   hidden: {},
@@ -20,17 +19,11 @@ const item = {
 }
 
 export function Hero() {
-  const { t } = useTranslation()
-  
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Ultra-light CSS grid + glow backdrop (zero video weight) */}
       <div className="absolute inset-0 z-0 hero-grid" aria-hidden="true" />
       <div className="absolute inset-0 z-0 hero-glow" aria-hidden="true" />
-      {/* Fade the backdrop into the page */}
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-transparent via-background/30 to-background" aria-hidden="true" />
-
-      {/* Interactive data network layer */}
       <div className="absolute inset-0 z-[1]">
         <InteractiveGrid className="h-full w-full" />
       </div>
@@ -49,29 +42,29 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-secondary opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-secondary" />
           </span>
-          {t("hero.badge")}
+          AICore Digital LLC · Richmond, Virginia
         </motion.div>
 
         <motion.h1
           variants={item}
-          className="text-5xl md:text-8xl font-black tracking-tighter mb-6 uppercase"
+          className="text-5xl md:text-7xl font-black tracking-tighter mb-6 uppercase"
         >
-          <span className="shimmer">{t("hero.title1")}</span>{" "}
-          <span className="text-primary drop-shadow-[0_0_25px_rgba(168,85,247,0.5)]">{t("hero.title2")}</span>
+          <span className="shimmer">AI that assists.</span>{" "}
+          <span className="text-primary drop-shadow-[0_0_25px_rgba(168,85,247,0.5)]">Humans that decide.</span>
         </motion.h1>
 
         <motion.h2
           variants={item}
-          className="mx-auto max-w-[900px] text-2xl md:text-4xl text-foreground font-bold mb-6 text-pretty"
+          className="mx-auto max-w-[900px] text-xl md:text-3xl text-foreground font-bold mb-6 text-pretty"
         >
-          {t("hero.mainHeading")}
+          Supervised automation for companies. Instruction tools for institutions.
         </motion.h2>
 
         <motion.p
           variants={item}
           className="mx-auto max-w-[800px] text-lg md:text-xl text-muted-foreground font-medium mb-10 text-pretty"
         >
-          {t("hero.subtitle")}
+          We build case desks, routing, and audit logs with a human in the loop. We do not train foundation models on client data. Hosting stays where the client names it.
         </motion.p>
 
         <motion.div variants={item} className="mx-auto mb-10 w-full max-w-5xl">
@@ -88,7 +81,7 @@ export function Hero() {
                 size="lg"
                 className="tactile h-16 px-10 rounded-full text-xl font-bold text-white bg-gradient-to-r from-fuchsia-600 via-purple-600 to-cyan-500 hover:from-fuchsia-500 hover:via-purple-500 hover:to-cyan-400 shadow-2xl shadow-purple-600/40 border-0"
               >
-                {t("hero.cta.primary")}
+                Book a 30-minute call
               </Button>
             </LeadFormDialog>
           </Magnetic>
@@ -99,7 +92,7 @@ export function Hero() {
               className="tactile h-16 px-10 rounded-full text-lg font-semibold text-white border-2 border-cyan-400/50 hover:border-cyan-400 hover:bg-cyan-400/10 backdrop-blur-sm bg-transparent"
               onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
             >
-              {t("hero.cta.secondary")}
+              How we work
             </Button>
           </Magnetic>
         </motion.div>
