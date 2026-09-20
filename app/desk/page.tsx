@@ -5,6 +5,7 @@ import Link from "next/link"
 import { ArrowLeft, AlertTriangle, CheckCircle2 } from "lucide-react"
 import { LogoMark } from "@/components/logo"
 import { Button } from "@/components/ui/button"
+import { RelevanceBridge } from "@/components/relevance-bridge"
 
 type Flag = { code: string; severity: string; detail: string }
 type CaseRow = {
@@ -212,12 +213,7 @@ export default function DeskPage() {
             <Button variant="outline" className="rounded-full" asChild>
               <label className="cursor-pointer">
                 Upload JSON
-                <input
-                  type="file"
-                  accept="application/json,.json"
-                  className="hidden"
-                  onChange={(e) => onFile(e.target.files?.[0])}
-                />
+                <input type="file" accept="application/json,.json" className="hidden" onChange={(e) => onFile(e.target.files?.[0])} />
               </label>
             </Button>
             <Button
@@ -253,6 +249,8 @@ export default function DeskPage() {
             <p className="text-2xl font-semibold">{Object.keys(decisions).length}</p>
           </div>
         </div>
+
+        <RelevanceBridge rows={rows} decisions={decisions} />
 
         <div className="space-y-4">
           {rows.map((r) => (
