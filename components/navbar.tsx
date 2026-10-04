@@ -14,7 +14,7 @@ const links = [
   { label: "Services", href: "/services", route: true },
   { label: "Marketing", href: "/marketing", route: true },
   { label: "Robotics", href: "/robotics", route: true },
-  { label: "Contact", href: "#contact", route: false },
+  { label: "Contact", href: "/contact", route: true },
 ]
 
 export function Navbar() {
