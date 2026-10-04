@@ -13,6 +13,7 @@ const links = [
   { label: "Desk", href: "/desk", route: true },
   { label: "Services", href: "/services", route: true },
   { label: "Marketing", href: "/marketing", route: true },
+  { label: "Robotics", href: "/robotics", route: true },
   { label: "Contact", href: "#contact", route: false },
 ]
 
