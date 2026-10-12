@@ -11,6 +11,7 @@ import { LanguageSwitcher } from "@/components/language-switcher"
 const links = [
   { label: "Founder", href: "/founder", route: true },
   { label: "Desk", href: "/desk", route: true },
+  { label: "Products", href: "/products", route: true },
   { label: "Services", href: "/services", route: true },
   { label: "Marketing", href: "/marketing", route: true },
   { label: "Robotics", href: "/robotics", route: true },
@@ -30,7 +31,7 @@ export function Navbar() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-8 xl:flex">
           {links.map((link) =>
             link.route ? (
               <Link key={link.href} href={link.href} className="text-sm font-medium text-muted-foreground hover:text-foreground">
@@ -44,7 +45,7 @@ export function Navbar() {
           )}
         </nav>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           <LanguageSwitcher />
           <LeadFormDialog>
             <Button size="default" className="rounded-full px-6 font-semibold">
@@ -53,7 +54,7 @@ export function Navbar() {
           </LeadFormDialog>
         </div>
 
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2 xl:hidden">
           <LanguageSwitcher compact />
           <button
             className="text-foreground p-2"
@@ -66,7 +67,7 @@ export function Navbar() {
       </div>
 
       {mobileOpen && (
-        <div className="absolute top-full left-0 right-0 border-b border-border bg-background/95 backdrop-blur-lg px-6 py-8 md:hidden">
+        <div className="absolute top-full left-0 right-0 border-b border-border bg-background/95 backdrop-blur-lg px-6 py-8 xl:hidden">
           <nav className="flex flex-col gap-6 text-center">
             {links.map((link) =>
               link.route ? (

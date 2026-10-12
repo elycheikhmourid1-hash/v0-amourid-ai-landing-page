@@ -87,7 +87,7 @@ const SALES_TAB = {
   id: "sales-outreach",
   label: "Sales Outreach Agent",
   tabIcon: Bot,
-  result: "Every new lead gets a personalized, human-quality email in ~1.2s — fully hands-off.",
+  result: "Demo scenario (illustrative data): a personalized email draft in ~1.2s, then a person decides.",
 }
 
 export function IndustrySimulator() {
@@ -188,7 +188,7 @@ export function IndustrySimulator() {
                   </span>
                   <div>
                     <p className="text-sm font-bold text-foreground">AI Core Digital — Sales Outreach Agent</p>
-                    <p className="text-xs text-muted-foreground">Live production scenario · 5 connected modules</p>
+                    <p className="text-xs text-muted-foreground">Demo scenario (illustrative data)</p>
                   </div>
                 </div>
                 <span className="rounded-full border border-white/10 bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground">
