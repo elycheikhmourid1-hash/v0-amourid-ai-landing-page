@@ -276,7 +276,7 @@ export function SalesOutreachFlow() {
             <Zap className="h-4 w-4" />
           </span>
           <div>
-            <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Execution Time</p>
+            <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Demo timing (illustrative)</p>
             <p className="font-mono text-lg font-bold tabular-nums text-foreground">
               {execTime.toFixed(1)}s
             </p>
@@ -289,8 +289,8 @@ export function SalesOutreachFlow() {
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
           </span>
           <div>
-            <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Status</p>
-            <p className="text-sm font-bold text-emerald-400">Active &amp; Automated</p>
+            <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Demo status</p>
+            <p className="text-sm font-bold text-emerald-400">Illustrative data</p>
           </div>
         </div>
 
@@ -299,7 +299,7 @@ export function SalesOutreachFlow() {
             <CheckCircle2 className="h-4 w-4" />
           </span>
           <div>
-            <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Successful Runs</p>
+            <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Demo runs (illustrative data)</p>
             <p className="font-mono text-lg font-bold tabular-nums text-foreground">
               {runs.toLocaleString()}
             </p>

@@ -16,13 +16,13 @@ const SCRIPT: LogLine[] = [
   { kind: "thought", text: "Analyzing incoming request: 'New high-value lead from website form'…", delay: 500 },
   { kind: "thought", text: "Intent detected → enrich lead, score it, route to sales.", delay: 900 },
   { kind: "exec", text: "Calling tool: enrichContact(email) via Clearbit…", delay: 800 },
-  { kind: "data", text: "Resolved: Acme Corp · 240 employees · SaaS · ARR ~$8M", delay: 1000 },
-  { kind: "thought", text: "Lead score computed: 92/100 (enterprise fit, high intent).", delay: 850 },
+  { kind: "data", text: "Demo scenario (illustrative data): sample firm · 240 employees · SaaS · ARR ~$8M", delay: 1000 },
+  { kind: "thought", text: "Lead score (illustrative): 92/100.", delay: 850 },
   { kind: "exec", text: "Querying database: SELECT owner FROM territories WHERE region='EMEA'…", delay: 900 },
-  { kind: "data", text: "Assigned account executive: Sara K.", delay: 700 },
+  { kind: "data", text: "Assigned sample account executive (illustrative).", delay: 700 },
   { kind: "exec", text: "Writing record → HubSpot CRM (deal stage: Qualified)…", delay: 900 },
   { kind: "exec", text: "Dispatching Telegram alert to #sales-priority…", delay: 800 },
-  { kind: "output", text: "Workflow complete — lead enriched, scored, routed & team notified in 4.2s.", delay: 900 },
+  { kind: "output", text: "Demo scenario (illustrative data) complete — sample run finished in 4.2s.", delay: 900 },
 ]
 
 const KIND_META: Record<LogKind, { label: string; icon: typeof Cpu; color: string }> = {
@@ -79,14 +79,16 @@ export function AgentPlayground() {
         <div className="mx-auto mb-12 max-w-3xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-sm font-medium text-foreground">
             <Terminal className="h-4 w-4 text-cyan-400" />
-            Live Agent Playground
+            Demo Agent Playground
           </span>
           <h2 className="mt-6 text-balance text-4xl font-bold tracking-tight md:text-5xl">
             See an <span className="shimmer">autonomous AI agent</span> think and act.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-pretty text-muted-foreground">
-            Trigger a live demo and watch the agent reason, call tools, query data, and complete a
-            real automation — exactly how our production agents operate.
+            Trigger a demo and watch a scripted agent reason, call tools, and finish a sample run.
+          </p>
+          <p className="mx-auto mt-3 text-sm font-medium text-foreground">
+            Demo scenario (illustrative data)
           </p>
         </div>
 

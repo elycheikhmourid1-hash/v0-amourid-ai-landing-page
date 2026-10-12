@@ -155,8 +155,8 @@ export function AutomationSimulator() {
             <span className="shimmer">Watch the automation build itself.</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-pretty text-muted-foreground">
-            Type any operational headache in plain language. Our AI architect designs a real,
-            production-grade workflow — live, in seconds.
+            Type any operational headache in plain language. The simulator drafts a sample
+            workflow. Timings and totals are a demo scenario (illustrative data).
           </p>
         </div>
 
@@ -251,11 +251,12 @@ export function AutomationSimulator() {
                   {workflow.summary}
                 </p>
 
-                {/* Live execution telemetry */}
-                <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+                {/* Illustrative demo telemetry */}
+                <p className="mt-5 text-sm font-medium text-muted-foreground">Demo scenario (illustrative data)</p>
+                <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
                   <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/5 px-3 py-1.5 text-sm font-medium text-foreground">
                     <Clock className="h-4 w-4 text-cyan-400" />
-                    Execution Time:{" "}
+                    Demo timing (illustrative):{" "}
                     <span className="font-mono text-cyan-400">{workflow.executionTime ?? "1.2s"}</span>
                   </span>
                   <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/5 px-3 py-1.5 text-sm font-medium text-foreground">
@@ -263,8 +264,8 @@ export function AutomationSimulator() {
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                       <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
                     </span>
-                    Status:{" "}
-                    <span className="text-emerald-400">{workflow.status ?? "Active & Automated"}</span>
+                    Demo status:{" "}
+                    <span className="text-emerald-400">Illustrative data</span>
                   </span>
                 </div>
               </div>
@@ -329,29 +330,32 @@ export function AutomationSimulator() {
                 })}
               </div>
 
-              {/* ROI / stats */}
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
+              {/* Illustrative demo figures — not reported results */}
+              <p className="mt-10 text-center text-sm font-medium text-muted-foreground">
+                Demo scenario (illustrative data)
+              </p>
+              <div className="mt-4 grid gap-4 sm:grid-cols-3">
                 <div className="glass rounded-2xl p-6 text-center">
                   <Clock className="mx-auto mb-2 h-6 w-6 text-cyan-400" />
                   <div className="text-3xl font-bold text-foreground">
                     <Counter value={workflow.hoursSavedPerWeek} />
                     <span className="text-lg text-muted-foreground"> hrs/wk</span>
                   </div>
-                  <p className="mt-1 text-sm text-muted-foreground">Human hours saved</p>
+                  <p className="mt-1 text-sm text-muted-foreground">Hours saved (illustrative)</p>
                 </div>
                 <div className="glass rounded-2xl p-6 text-center">
                   <Gauge className="mx-auto mb-2 h-6 w-6 text-fuchsia-400" />
                   <div className="text-3xl font-bold text-foreground">
                     $<Counter value={roiPerMonth} />
                   </div>
-                  <p className="mt-1 text-sm text-muted-foreground">Est. monthly value</p>
+                  <p className="mt-1 text-sm text-muted-foreground">Monthly value (illustrative)</p>
                 </div>
                 <div className="glass rounded-2xl p-6 text-center">
                   <Repeat className="mx-auto mb-2 h-6 w-6 text-purple-300" />
                   <div className="text-3xl font-bold text-foreground">
                     <Counter value={workflow.monthlyTaskRuns} />
                   </div>
-                  <p className="mt-1 text-sm text-muted-foreground">Tasks run / month</p>
+                  <p className="mt-1 text-sm text-muted-foreground">Tasks / month (illustrative)</p>
                 </div>
               </div>
             </motion.div>
